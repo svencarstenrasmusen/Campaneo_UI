@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+/// This widget acts as a tile button for the homepage screen. Where other
+/// widgets can be displayed in.
+
+
 class MenuTile extends StatelessWidget {
 
   final String title;
+  final Widget widget;
 
-  MenuTile(@required this.title);
+  MenuTile(this.title, this.widget);
+
+  //TODO: add ontap-function, all tiles have a different screen to navigate to
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,10 @@ class MenuTile extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(height: 10),
-            Text(this.title, style: TextStyle(color: Colors.white, fontSize: 40))
+            Text(this.title, style: TextStyle(color: Colors.white, fontSize: 40)),
+            Spacer(flex: 2),
+            this.widget,
+            Spacer(flex: 4),
           ],
         ),
       ),
