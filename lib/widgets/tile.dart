@@ -16,27 +16,27 @@ class MenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        height: MediaQuery.of(context).size.height / 2,
-        width: MediaQuery.of(context).size.width / 2,
+    return Container(
+      height: MediaQuery.of(context).size.height / 2,
+      width: MediaQuery.of(context).size.width / 2,
+      child: Ink(
         decoration: BoxDecoration(
           color: HexColor("#3C3C3C"),
           border: Border.all(color: HexColor("#C4C4C4"), width: 2),
         ),
-        child: Column(
-          children: <Widget>[
-            Container(height: 10),
-            Text(this.title, style: TextStyle(color: Colors.white, fontSize: 40)),
-            Spacer(flex: 2),
-            this.widget,
-            Spacer(flex: 4),
-          ],
+        child: InkWell(
+          child: Column(
+            children: <Widget>[
+              Container(height: 10),
+              Text(this.title, style: TextStyle(color: Colors.white, fontSize: 40)),
+              Spacer(flex: 2),
+              this.widget,
+              Spacer(flex: 4),
+            ],
+          ),
+          onTap: () => { print('Tile tapped.') },
         ),
       ),
-      onTap: () {
-        print('Tile tapped.');
-      },
     );
   }
 
