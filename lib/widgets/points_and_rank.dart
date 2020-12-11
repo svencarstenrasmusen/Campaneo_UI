@@ -18,10 +18,10 @@ class PointsAndRank extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text(this.points, style: TextStyle(color: Colors.white, fontSize: 150)),
-          Column(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Container(height: 50),
+              Text(this.points, style: TextStyle(color: Colors.white, fontSize: 125)),
               Text("pts", style: TextStyle(color: Colors.white, fontSize: 70)),
             ],
           ),
@@ -32,7 +32,13 @@ class PointsAndRank extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(this.rankPosition, style: TextStyle(color: Colors.white, fontSize: 75)),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(this.rankPosition, style: TextStyle(color: Colors.white, fontSize: 75)),
+                  Text("th", style: TextStyle(color: Colors.white, fontSize: 45)),
+                ],
+              ),
               Container(
                 height: 2,
                 width: 200,
