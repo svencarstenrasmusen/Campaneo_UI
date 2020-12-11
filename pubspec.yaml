@@ -82,4 +82,3 @@ flutter:
       fonts:
         - asset: assets/fonts/impact.ttf
         - asset: assets/fonts/impacted.ttf
-        - asset: assets/fonts/unicode.impacted.ttf
