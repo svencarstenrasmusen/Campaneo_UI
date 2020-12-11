@@ -6,11 +6,13 @@ final appThemeData = {
   AppTheme.Light: ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.blue,
-      scaffoldBackgroundColor: Colors.white70),
+      scaffoldBackgroundColor: Colors.white70,
+      fontFamily: 'Impact'),
   AppTheme.Dark: ThemeData(
       brightness: Brightness.dark,
       primaryColor: Colors.black,
-      scaffoldBackgroundColor: Colors.black87),
+      scaffoldBackgroundColor: Colors.black87,
+      fontFamily: 'Impact'),
 };
 
 String getPrintName(AppTheme theme) {
