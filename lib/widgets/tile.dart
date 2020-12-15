@@ -17,7 +17,7 @@ class MenuTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width / 2,
       child: Ink(
         decoration: BoxDecoration(

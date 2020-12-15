@@ -14,7 +14,15 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: null,
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height / 10,
+        child: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.timer), label: "Time")
+          ],
+        ),
+      ),
       body: _selectedPage,
     );
   }
