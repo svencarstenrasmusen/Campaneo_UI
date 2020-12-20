@@ -9,8 +9,9 @@ class MenuTile extends StatelessWidget {
 
   final String title;
   final Widget widget;
+  final Function onTap;
 
-  MenuTile(this.title, this.widget);
+  MenuTile(this.title, this.widget, this.onTap);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -34,7 +35,7 @@ class MenuTile extends StatelessWidget {
               Spacer(flex: 4),
             ],
           ),
-          onTap: () => { print('Tile tapped.') },
+          onTap: () => { this.onTap() },
         ),
       ),
     );
