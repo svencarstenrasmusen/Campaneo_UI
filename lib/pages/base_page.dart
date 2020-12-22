@@ -36,7 +36,7 @@ class _BasePageState extends State<BasePage> {
               IconButton(
                 iconSize: 60,
                 icon: Icon(Icons.home),
-                onPressed: () => { print('tapping homeButton') },
+                onPressed: () => { changeScreen(0) },
               ),
               Spacer(flex: 20),
               Text(_currentTime(), style: TextStyle(color: Colors.white, fontSize: 60)),
