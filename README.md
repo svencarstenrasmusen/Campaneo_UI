@@ -2,15 +2,15 @@
 
 An application to build a trusted platform for sensor data sharing.
 
-## Getting Started
+## To-Do:
 
-This project is a starting point for a Flutter application.
+- First hardcoded data to check if the widgets suit the design.
+- Differentiate ActiveCampaign page and NewCampaignPage by listing only the requested campaigns.
+- Build CouponShop.
+- Add Settings Iconbutton and navigate to settings screen.
+- Adjust themeManager to the user's entered colour theme.
+- Connect to the GraphQL and use that data for the application as soon as the design is good.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
+Flutter Documentation for further help:
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
