@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 /// This widget is the points and ranked widget, displaying both the user's
 /// points and also their rank next to it.

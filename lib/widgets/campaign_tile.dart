@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
-
 
 class CampaignTile extends StatelessWidget {
 
   final String title;
   AssetImage image;
-
+  Status status;
 
   CampaignTile(this.title);
 
@@ -41,8 +41,15 @@ class CampaignTile extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 20)),
+                child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 25)),
               ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 10, bottom: 10),
+                  child: StatusWidget(Status.New),
+                ),
+              )
             ],
           ),
           onTap: () => { null },

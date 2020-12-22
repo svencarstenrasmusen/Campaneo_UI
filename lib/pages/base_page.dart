@@ -3,9 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'pages.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:campaneo_app/widgets/points_and_rank.dart';
-import 'package:campaneo_app/widgets/menu_tile.dart';
 
 
 class BasePage extends StatefulWidget {
@@ -68,32 +65,6 @@ class _BasePageState extends State<BasePage> {
           break;
       }
     });
-  }
-
-  Widget _mainMenu() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              //TODO: change textStyle according to theme automatically
-              MenuTile("Your Vehicle",  Icon(Icons.directions_car, size: 200, color: Colors.white), () => { print("base")} ),
-              MenuTile("Your Active Campaigns", CircleAvatar(
-                child: Text("12", style: TextStyle(fontSize: 125, color: Colors.white, fontWeight: FontWeight.bold)),
-                radius: 125,
-                backgroundColor: Colors.lightGreenAccent,
-              ), changeScreen(0))
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              MenuTile("New Campaigns", Icon(Icons.search, size: 200, color: Colors.white), changeScreen(0)),
-              MenuTile("Contributor Points", PointsAndRank("107", "148", "47889"), changeScreen(0))
-            ],
-          )
-        ],
-      ),
-    );
   }
   //TODO: build page
 }

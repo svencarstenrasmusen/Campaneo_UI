@@ -20,7 +20,7 @@ class AllCampaignsPage extends StatelessWidget {
                   crossAxisCount: 3,
                   childAspectRatio: 1.85
               ),
-              itemBuilder: (BuildContext context, int index) => CampaignTile('Item $index')
+              itemBuilder: (BuildContext context, int index) => CampaignTile('Verkehrsanalyse in Innsbruck $index')
           ),
         ),
     );
