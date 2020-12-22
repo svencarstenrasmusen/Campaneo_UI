@@ -50,7 +50,9 @@ class _BasePageState extends State<BasePage> {
 
   String _currentTime() {
     var now = DateTime.now();
-    return '${now.hour}:${now.minute}';
+    String time = DateTime.parse(now.toIso8601String()).toLocal().toString();
+    time = time.substring(11, 16);
+    return '$time';
   }
 
   changeScreen(x) {
