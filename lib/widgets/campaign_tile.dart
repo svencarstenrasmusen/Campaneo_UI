@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 class CampaignTile extends StatelessWidget {
 
   final String title;
+  AssetImage image;
 
 
   CampaignTile(this.title);
@@ -24,24 +25,26 @@ class CampaignTile extends StatelessWidget {
           color: HexColor("#3C3C3C"),
           border: Border.all(color: HexColor("#C4C4C4"), width: 1),
           image: DecorationImage(
-            image: AssetImage('assets/images/campaign-back.png')
+            image: AssetImage('assets/images/campaign-back.png'),
+            fit: BoxFit.cover
           )
         ),
         child: InkWell(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: <Widget>[
-              Opacity(
-                opacity: 0.5,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: double.maxFinite,
-                  color: Colors.grey,
-                  child: Center(
-                    child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 20)),
+              Center(
+                child: Opacity(
+                  opacity: 0.5,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: double.maxFinite,
+                    color: Colors.grey,
                   ),
                 ),
-              )
+              ),
+              Center(
+                child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
             ],
           ),
           onTap: () => { null },
