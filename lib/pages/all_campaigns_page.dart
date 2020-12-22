@@ -13,13 +13,16 @@ class AllCampaignsPage extends StatelessWidget {
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.90
-            ),
-            itemBuilder: (BuildContext context, int index) => CampaignTile('Item $index')
-        )
+        child: Scrollbar(
+          child: GridView.builder(
+            itemCount: 20,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.85
+              ),
+              itemBuilder: (BuildContext context, int index) => CampaignTile('Item $index')
+          ),
+        ),
     );
   }
 }
