@@ -18,8 +18,6 @@ class CampaignTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.30,
-      width: MediaQuery.of(context).size.width / 3,
       child: Ink(
         decoration: BoxDecoration(
           color: HexColor("#3C3C3C"),
