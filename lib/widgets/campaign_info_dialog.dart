@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:campaneo_app/widgets/information_selection_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -65,7 +66,7 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("CONTINUE", style: TextStyle(fontSize: 60)),
           ),
-          onTap: () => { print("tapped decline.") },
+          onTap: () => { showInformationSelection(context) },
         ),
       ),
     );
@@ -84,6 +85,13 @@ class CampaignInfoDialog extends StatelessWidget {
           onTap: () => { print("tapped decline.") },
         ),
       ),
+    );
+  }
+
+  showInformationSelection(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => InformationSelectionDialog()
     );
   }
 
