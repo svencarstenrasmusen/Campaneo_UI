@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           Row(
             children: <Widget>[
               MenuTile("New Campaigns", Icon(Icons.search, size: 200, color: Colors.white), () { changeScreen(1);}),
-              MenuTile("Contributor Points", PointsAndRank("107", "148", "47889"), null)
+              MenuTile("Contributor Points", PointsAndRank("107", "148", "47889"), () { changeScreen(2);})
             ],
           )
         ],

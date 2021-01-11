@@ -36,12 +36,6 @@ class _BasePageState extends State<BasePage> {
                 icon: Icon(Icons.home),
                 onPressed: () => { changeScreen(0) },
               ),
-              Spacer(),
-              IconButton(
-                iconSize: 60,
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () => { changeScreen(2) },
-              ),
               Spacer(flex: 20),
               Text(_currentTime(), style: TextStyle(color: Colors.white, fontSize: 60)),
               Spacer()
