@@ -1,5 +1,6 @@
 import 'package:campaneo_app/pages/all_campaigns_page.dart';
 import 'package:campaneo_app/pages/shop_page.dart';
+import 'package:campaneo_app/pages/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -36,6 +37,12 @@ class _BasePageState extends State<BasePage> {
                 icon: Icon(Icons.home),
                 onPressed: () => { changeScreen(0) },
               ),
+              Spacer(),
+              IconButton(
+                iconSize: 60,
+                icon: Icon(Icons.settings),
+                onPressed: () => { changeScreen(3) },
+              ),
               Spacer(flex: 20),
               Text(_currentTime(), style: TextStyle(color: Colors.white, fontSize: 60)),
               Spacer()
@@ -66,6 +73,9 @@ class _BasePageState extends State<BasePage> {
           break;
         case 2:
           _selectedPage = ShopPage();
+          break;
+        case 3:
+          _selectedPage = SettingsPage();
           break;
       }
     });
