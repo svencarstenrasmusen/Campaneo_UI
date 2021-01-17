@@ -1,23 +1,25 @@
 import 'dart:ui';
 import 'package:campaneo_app/widgets/information_selection_dialog.dart';
+import 'package:campaneo_app/widgets/queryable_campaign_details.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:campaneo_app/data/models.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
 
 class CampaignInfoDialog extends StatelessWidget {
 
-  final String campaigner;
+  /**final String campaigner;
   final String title;
   final String description;
   final String phoneNumber;
   final String address;
-  final String email;
+  final String email;*/
 
-  CampaignInfoDialog(this.title, this.campaigner, this.description, this.phoneNumber, this.address, this.email);
+  final Campaign campaignDetails;
 
-  //TODO: add ontap-function, all tiles have a different screen to navigate to
+  CampaignInfoDialog(@required this.campaignDetails);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,13 @@ class CampaignInfoDialog extends StatelessWidget {
   }
 
   Widget dialogContent(BuildContext context) {
+
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
-      height: MediaQuery.of(context).size.height * 0.85,
-      width: MediaQuery.of(context).size.width * 0.80,
+      height: height * 0.85,
+      width: width * 0.80,
       padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
       decoration: BoxDecoration(
         color: HexColor("#3C3C3C"),
@@ -38,12 +44,12 @@ class CampaignInfoDialog extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(this.title, style: TextStyle(fontSize: 40, color: Colors.white70)),
-          Text(this.campaigner, style: TextStyle(fontSize: 20, color: Colors.white70)),
-          Text(this.description, style: TextStyle(fontSize: 30, color: Colors.white70)),
-          Text(this.address, style: TextStyle(fontSize: 20, color: Colors.white70)),
-          Text(this.phoneNumber, style: TextStyle(fontSize: 20, color: Colors.white70)),
-          Text(this.email, style: TextStyle(fontSize: 20, color: Colors.white70)),
+          Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70)),
+          Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+          Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+          Text(this.campaignDetails.organization.address.toString(), style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+          Text(this.campaignDetails.organization.phone, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+          Text(this.campaignDetails.organization.email, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campaneo_app/widgets/campaign_tile.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:campaneo_app/data/models.dart';
 
 import '../data/campaign_fetch.dart';
 
@@ -38,7 +39,7 @@ class AllCampaignsPage extends StatelessWidget {
               childAspectRatio: 1.85
             ),
             itemBuilder: (BuildContext context, int index) =>
-              CampaignTile(campaigns[index]['name']),
+              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index])),
           ),
         )
         : Container();
