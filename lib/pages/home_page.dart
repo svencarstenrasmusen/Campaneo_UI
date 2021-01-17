@@ -12,23 +12,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double iconSize = height / 3;
+
     return Container(
       child: Column(
         children: <Widget>[
           Row(
             children: <Widget>[
               //TODO: change textStyle according to theme automatically
-              MenuTile("Your Vehicle",  Icon(Icons.directions_car, size: 200, color: Colors.white), () { changeScreen(1);}),
+              MenuTile("Your Vehicle",  Icon(Icons.directions_car, size: iconSize, color: Colors.white), () { changeScreen(1);}),
               MenuTile("Your Active Campaigns", CircleAvatar(
-                child: Text("12", style: TextStyle(fontSize: 125, color: Colors.white, fontWeight: FontWeight.bold)),
-                radius: 125,
+                child: Text("12", style: TextStyle(fontSize: height / 6.5, color: Colors.white, fontWeight: FontWeight.bold)),
+                radius: height / 6.5,
                 backgroundColor: Colors.lightGreenAccent,
               ), null)
             ],
           ),
           Row(
             children: <Widget>[
-              MenuTile("New Campaigns", Icon(Icons.search, size: 200, color: Colors.white), () { changeScreen(1);}),
+              MenuTile("New Campaigns", Icon(Icons.search, size: iconSize, color: Colors.white), () { changeScreen(1);}),
               MenuTile("Contributor Points", PointsAndRank("107", "148", "47889"), () { changeScreen(2);})
             ],
           )

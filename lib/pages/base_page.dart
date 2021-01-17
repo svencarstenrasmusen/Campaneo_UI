@@ -23,28 +23,32 @@ class _BasePageState extends State<BasePage> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double iconSize = height / 10;
+
     return Scaffold(
       body: _selectedPage,
       bottomNavigationBar: SizedBox(
-        height: MediaQuery.of(context).size.height / 10,
+        height: height / 10,
         child: BottomAppBar(
           child: Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Spacer(),
               IconButton(
-                iconSize: 60,
+                padding: EdgeInsets.all(0), //center icon in IconButton
+                iconSize: iconSize,
                 icon: Icon(Icons.home),
                 onPressed: () => { changeScreen(0) },
               ),
               Spacer(),
               IconButton(
-                iconSize: 60,
+                padding: EdgeInsets.all(0), //center icon in IconButton
+                iconSize: iconSize,
                 icon: Icon(Icons.settings),
                 onPressed: () => { changeScreen(3) },
               ),
               Spacer(flex: 20),
-              Text(_currentTime(), style: TextStyle(color: Colors.white, fontSize: 60)),
+              Text(_currentTime(), style: TextStyle(color: Colors.white, fontSize: height / 12)),
               Spacer()
             ],
           ),
