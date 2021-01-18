@@ -25,7 +25,12 @@ class QueryableCampaignDetails extends StatelessWidget {
           return Text(result.exception.toString());
         }
         if (result.loading) {
-          return Text('Loading');
+          return Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 5,
+            ),
+          );
+          //return Text('Loading');
         }
         final data = result.data['getCampaign2'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
