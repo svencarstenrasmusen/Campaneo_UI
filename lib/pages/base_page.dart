@@ -44,6 +44,13 @@ class _BasePageState extends State<BasePage> {
               IconButton(
                 padding: EdgeInsets.all(0), //center icon in IconButton
                 iconSize: iconSize,
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () => { changeScreen(2) },
+              ),
+              Spacer(),
+              IconButton(
+                padding: EdgeInsets.all(0), //center icon in IconButton
+                iconSize: iconSize,
                 icon: Icon(Icons.settings),
                 onPressed: () => { changeScreen(3) },
               ),

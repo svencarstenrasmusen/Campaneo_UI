@@ -2,8 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:campaneo_app/widgets/status_widget.dart';
-import 'package:campaneo_app/widgets/campaign_info_dialog.dart';
+import 'package:campaneo_app/data/coupons.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -12,6 +11,7 @@ class RewardTile extends StatelessWidget {
 
   final int points;
   final int reductionPercentage;
+  final Coupon coupon = new Coupon("Lorem ipsum...");
 
   RewardTile(this.points, this.reductionPercentage);
 
@@ -45,8 +45,8 @@ class RewardTile extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("-${this.reductionPercentage}%", style: TextStyle(color: Colors.white, fontSize: height / 7)),
-                    Icon(Icons.local_gas_station, size: height / 6)
+                    Text("-${this.coupon.getReduction()}%", style: TextStyle(color: Colors.white, fontSize: height / 7)),
+                    Icon(iconForCouponType(this.coupon.getType()), size: height / 7)
                   ],
                 ),
               ),
@@ -54,7 +54,7 @@ class RewardTile extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.only(right: 5, bottom: 5),
-                  child: Text("${this.points} PTS", style: TextStyle(color: Colors.white, fontSize: height / 15)),
+                  child: Text("${this.coupon.getCost()} PTS", style: TextStyle(color: Colors.white, fontSize: height / 15)),
                 ),
               ),
             ],
@@ -63,5 +63,23 @@ class RewardTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData iconForCouponType(couponType type) {
+    print("changing screen.");
+    switch(type) {
+      case couponType.Fuel:
+        return Icons.local_gas_station;
+        break;
+      case couponType.CarWash:
+        return Icons.local_car_wash;
+        break;
+      case couponType.Service:
+        return Icons.build;
+        break;
+      default:
+        return Icons.card_giftcard;
+        break;
+    }
   }
 }
