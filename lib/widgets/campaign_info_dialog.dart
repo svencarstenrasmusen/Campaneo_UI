@@ -30,7 +30,6 @@ class CampaignInfoDialog extends StatelessWidget {
   }
 
   Widget dialogContent(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -44,17 +43,25 @@ class CampaignInfoDialog extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70)),
+          Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
           Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-          Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+          Container(
+            height: height * 0.3,
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                scrollDirection: Axis.vertical,
+              ),
+            )
+          ),
           Text(this.campaignDetails.organization.address.toString(), style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Text(this.campaignDetails.organization.phone, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Text(this.campaignDetails.organization.email, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              continueButton(context),
-              declineButton(context)
+              continueButton(context, height, width),
+              declineButton(context, height, width)
             ],
           ),
         ],
@@ -62,15 +69,15 @@ class CampaignInfoDialog extends StatelessWidget {
     );
   }
 
-  Widget continueButton(BuildContext context) {
+  Widget continueButton(BuildContext context, double height, double width) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
-      width: MediaQuery.of(context).size.width * 0.25,
+      height: height * 0.15,
+      width: width * 0.25,
       child: Material(
         color: Colors.green,
         child: InkWell(
           child: Center(
-            child: Text("CONTINUE", style: TextStyle(fontSize: 60)),
+            child: Text("CONTINUE", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () => { showInformationSelection(context) },
         ),
@@ -78,15 +85,15 @@ class CampaignInfoDialog extends StatelessWidget {
     );
   }
 
-  Widget declineButton(BuildContext context) {
+  Widget declineButton(BuildContext context, double height, double width) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
-      width: MediaQuery.of(context).size.width * 0.25,
+      height: height * 0.15,
+      width: width * 0.25,
       child: Material(
         color: Colors.red,
         child: InkWell(
           child: Center(
-            child: Text("DECLINE", style: TextStyle(fontSize: 60)),
+            child: Text("DECLINE", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () => { print("tapped decline.") },
         ),

@@ -17,9 +17,12 @@ class MenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45,
-      width: MediaQuery.of(context).size.width / 2,
+      height: height * 0.45,
+      width: width / 2,
       child: Ink(
         decoration: BoxDecoration(
           color: HexColor("#3C3C3C"),
@@ -28,8 +31,7 @@ class MenuTile extends StatelessWidget {
         child: InkWell(
           child: Column(
             children: <Widget>[
-              Container(height: 10),
-              Text(this.title, style: TextStyle(color: Colors.white, fontSize: 40)),
+              Text(this.title, style: TextStyle(color: Colors.white, fontSize: height / 12)),
               Spacer(flex: 2),
               this.widget,
               Spacer(flex: 4),

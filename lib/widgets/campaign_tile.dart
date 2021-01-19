@@ -23,6 +23,9 @@ class CampaignTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
       child: Ink(
         decoration: BoxDecoration(
@@ -40,19 +43,19 @@ class CampaignTile extends StatelessWidget {
                 child: Opacity(
                   opacity: 0.5,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: height * 0.15,
                     width: double.maxFinite,
                     color: Colors.grey,
                   ),
                 ),
               ),
               Center(
-                child: Text(this.campaign.name, style: TextStyle(color: Colors.white, fontSize: 25)),
+                child: Text(this.campaign.name, style: TextStyle(color: Colors.white, fontSize: height / 20), softWrap: false, overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center),
               ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 10, bottom: 10),
+                  padding: EdgeInsets.only(right: 2, bottom: 2),
                   child: StatusWidget(Status.New),
                 ),
               ),

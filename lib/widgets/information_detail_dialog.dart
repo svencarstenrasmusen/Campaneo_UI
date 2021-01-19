@@ -26,9 +26,12 @@ class InformationDetailDialog extends StatelessWidget {
   }
 
   Widget dialogContent(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
-      height: MediaQuery.of(context).size.height * 0.85,
-      width: MediaQuery.of(context).size.width * 0.80,
+      height: height * 0.85,
+      width: width * 0.80,
       padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
       decoration: BoxDecoration(
         color: HexColor("#3C3C3C"),
@@ -36,14 +39,14 @@ class InformationDetailDialog extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(this.informationType, style: TextStyle(fontSize: 40, color: Colors.white70)),
-          Text(this.description, style: TextStyle(fontSize: 25, color: Colors.white70)),
-          Text("Reward: ${this.points}", style: TextStyle(fontSize: 40, color: Colors.white70)),
+          Text(this.informationType, style: TextStyle(fontSize: height / 15, color: Colors.white70)),
+          Text(this.description, style: TextStyle(fontSize: height / 25, color: Colors.white70)),
+          Text("Reward: ${this.points}", style: TextStyle(fontSize: height / 20, color: Colors.white70)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              continueButton(context),
-              declineButton(context)
+              continueButton(context, height, width),
+              declineButton(context, height, width)
             ],
           ),
         ],
@@ -51,15 +54,15 @@ class InformationDetailDialog extends StatelessWidget {
     );
   }
 
-  Widget continueButton(BuildContext context) {
+  Widget continueButton(BuildContext context, double height, double width) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
-      width: MediaQuery.of(context).size.width * 0.25,
+      height: height * 0.15,
+      width: width * 0.25,
       child: Material(
         color: Colors.green,
         child: InkWell(
           child: Center(
-            child: Text("ACCEPT", style: TextStyle(fontSize: 60)),
+            child: Text("ACCEPT", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () => { Navigator.pop(context) },
         ),
@@ -67,15 +70,15 @@ class InformationDetailDialog extends StatelessWidget {
     );
   }
 
-  Widget declineButton(BuildContext context) {
+  Widget declineButton(BuildContext context, double height, double width) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
-      width: MediaQuery.of(context).size.width * 0.25,
+      height: height * 0.15,
+      width: width * 0.25,
       child: Material(
         color: Colors.red,
         child: InkWell(
           child: Center(
-            child: Text("DECLINE", style: TextStyle(fontSize: 60)),
+            child: Text("DECLINE", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () => { Navigator.pop(context) },
         ),

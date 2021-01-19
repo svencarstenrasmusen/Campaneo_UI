@@ -14,10 +14,14 @@ class StatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
       child: CircleAvatar(
         backgroundColor: _statusColor(this.status),
-        child: _statusIcon(this.status),
+        radius: height / 25,
+        child: _statusIcon(this.status, height),
       ),
     );
   }
@@ -38,16 +42,16 @@ class StatusWidget extends StatelessWidget {
   }
 
   // ignore: missing_return
-  Widget _statusIcon(Status s) {
+  Widget _statusIcon(Status s, double height) {
     switch(s) {
       case Status.New:
-        return Text('?', style: TextStyle(fontSize: 25, color: Colors.black54, fontFamily: 'default', fontWeight: FontWeight.bold));
+        return Text('?', style: TextStyle(fontSize: height / 20, color: Colors.black54, fontFamily: 'default', fontWeight: FontWeight.bold));
         break;
       case Status.Accepted:
-        return Icon(Icons.check, size: 30);
+        return Icon(Icons.check, size: height / 20);
         break;
       case Status.Rejected:
-        return Icon(Icons.not_interested, size: 30);
+        return Icon(Icons.not_interested, size: height / 20);
         break;
     }
   }

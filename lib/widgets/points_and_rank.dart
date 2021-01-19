@@ -13,6 +13,9 @@ class PointsAndRank extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -20,13 +23,13 @@ class PointsAndRank extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Text(this.points, style: TextStyle(color: Colors.white, fontSize: 125)),
-              Text("pts", style: TextStyle(color: Colors.white, fontSize: 70)),
+              Text(this.points, style: TextStyle(color: Colors.white, fontSize: height / 6)),
+              Text("pts", style: TextStyle(color: Colors.white, fontSize: height / 10)),
             ],
           ),
           Container(
-            height: 150,
-            width: 5,
+            height: height / 5,
+            width: 4,
             color: Colors.white,
           ),
           Column(
@@ -34,16 +37,16 @@ class PointsAndRank extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(this.rankPosition, style: TextStyle(color: Colors.white, fontSize: 75)),
-                  Text("th", style: TextStyle(color: Colors.white, fontSize: 45)),
+                  Text(this.rankPosition, style: TextStyle(color: Colors.white, fontSize: height / 10)),
+                  Text("th", style: TextStyle(color: Colors.white, fontSize: height / 14)),
                 ],
               ),
               Container(
                 height: 2,
-                width: 200,
+                width: width / 5,
                 color: Colors.white,
               ),
-              Text(this.totalParticipants, style: TextStyle(color: Colors.white, fontSize: 75))
+              Text(this.totalParticipants, style: TextStyle(color: Colors.white, fontSize: height / 10))
             ],
           )
         ],

@@ -30,7 +30,7 @@ class InformationSelectionDialog extends StatelessWidget {
             itemCount: 7,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                childAspectRatio: 1.05
+                childAspectRatio: 1.0
             ),
             itemBuilder: (BuildContext context, int index) => InformationTile(Icon(Icons.speed), index)
         ),

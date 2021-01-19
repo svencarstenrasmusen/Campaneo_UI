@@ -19,6 +19,9 @@ class RewardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
       child: Ink(
         decoration: BoxDecoration(
@@ -32,7 +35,7 @@ class RewardTile extends StatelessWidget {
                 child: Opacity(
                   opacity: 0.5,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: height * 0.15,
                     width: double.maxFinite,
                     color: Colors.grey,
                   ),
@@ -42,16 +45,16 @@ class RewardTile extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("-${this.reductionPercentage}%", style: TextStyle(color: Colors.white, fontSize: 75)),
-                    Icon(Icons.local_gas_station, size: 100)
+                    Text("-${this.reductionPercentage}%", style: TextStyle(color: Colors.white, fontSize: height / 7)),
+                    Icon(Icons.local_gas_station, size: height / 6)
                   ],
                 ),
               ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 10, bottom: 10),
-                  child: Text("${this.points} PTS", style: TextStyle(color: Colors.white, fontSize: 30)),
+                  padding: EdgeInsets.only(right: 5, bottom: 5),
+                  child: Text("${this.points} PTS", style: TextStyle(color: Colors.white, fontSize: height / 15)),
                 ),
               ),
             ],

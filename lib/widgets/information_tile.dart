@@ -19,6 +19,9 @@ class InformationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: HexColor("#3C3C3C"), width: 5),
@@ -28,21 +31,21 @@ class InformationTile extends StatelessWidget {
         child: InkWell(
           splashColor: Colors.white70,
           child: Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(Icons.speed, size: 250, color: HexColor("#3C3C3C")),
+                Icon(Icons.speed, size: width / 6, color: HexColor("#3C3C3C")),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${this.points} PTS", style: TextStyle(fontSize: 40, color: HexColor("#3C3C3C"))),
+                    Text("${this.points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
                     IconButton(
-                        icon: Icon(Icons.info, size: 50, color: HexColor("#3C3C3C")),
+                        icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
                         onPressed: () => {showCampaignInfo(context)})
                   ],
-                )
+                ),
               ],
             ),
           ),
