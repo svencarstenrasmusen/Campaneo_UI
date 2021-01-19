@@ -9,23 +9,27 @@ class FakeUsers {
 
   int maxPoints;
   int maxCompletedCampaigns;
+  var random = new Random();
+  List<User> userList = new List<User>();
 
-  List<User> userList;
+  FakeUsers() {
+    generateListOfFakeUsers();
+  }
 
   User generateFakeUser() {
-    var random = new Random();
+
     String fakeName = "User: ${random.nextInt(100000)}";
     int fakePoints = random.nextInt(10000);
     int fakeCompletedCampaigns = random.nextInt(30);
 
     User fakeUser = User(fakeName, fakePoints, fakeCompletedCampaigns);
-
     return fakeUser;
   }
 
   generateListOfFakeUsers() {
-    for (int i = 0 ; i < numberOfUsers ; i++) {
-      userList.add(generateFakeUser());
+    for (int i = 0 ; i < 21 ; i++) {
+      User user = generateFakeUser();
+      userList.add(user);
     }
   }
 

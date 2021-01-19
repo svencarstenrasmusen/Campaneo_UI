@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'pages.dart';
+import 'package:campaneo_app/pages/ranking_page.dart';
 
 
 class BasePage extends StatefulWidget {
@@ -87,6 +88,9 @@ class _BasePageState extends State<BasePage> {
           break;
         case 3:
           _selectedPage = SettingsPage();
+          break;
+        case 4:
+          _selectedPage = RankingPage();
           break;
       }
     });
