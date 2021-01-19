@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:campaneo_app/data/coupons.dart';
+import 'package:campaneo_app/data/coupon.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -45,8 +45,8 @@ class RewardTile extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("-${this.coupon.getReduction()}%", style: TextStyle(color: Colors.white, fontSize: height / 7)),
-                    Icon(iconForCouponType(this.coupon.getType()), size: height / 7)
+                    Text("-${this.coupon.getReduction}%", style: TextStyle(color: Colors.white, fontSize: height / 7)),
+                    Icon(iconForCouponType(this.coupon.getType), size: height / 7)
                   ],
                 ),
               ),
@@ -54,7 +54,7 @@ class RewardTile extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.only(right: 5, bottom: 5),
-                  child: Text("${this.coupon.getCost()} PTS", style: TextStyle(color: Colors.white, fontSize: height / 15)),
+                  child: Text("${this.coupon.getCost} PTS", style: TextStyle(color: Colors.white, fontSize: height / 15)),
                 ),
               ),
             ],
