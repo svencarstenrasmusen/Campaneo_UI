@@ -1,6 +1,7 @@
 
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 
 class Campaign {
   String id;
@@ -11,6 +12,7 @@ class Campaign {
   String validTo;
   String gdprClassification;
   Organization organization;
+  Status status = Status.New;
 
   Campaign({
     this.id,

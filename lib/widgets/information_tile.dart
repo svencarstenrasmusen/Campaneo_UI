@@ -12,6 +12,7 @@ class InformationTile extends StatelessWidget {
 
   final Icon icon;
   final int points;
+  Color color = HexColor("#C4C4C4");
 
   InformationTile(this.icon, this.points);
 
@@ -27,7 +28,7 @@ class InformationTile extends StatelessWidget {
         border: Border.all(color: HexColor("#3C3C3C"), width: 5),
       ),
       child: Material(
-        color: HexColor("#C4C4C4"),
+        color: color,
         child: InkWell(
           splashColor: Colors.white70,
           child: Container(
@@ -49,10 +50,17 @@ class InformationTile extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () => { print("information tile tapped.") },
+          onTap: () {
+            changeColor();
+            (context as Element).markNeedsBuild();
+          },
         ),
       ),
     );
+  }
+
+  changeColor() {
+    this.color = Colors.green;
   }
 
   showCampaignInfo(BuildContext context) {

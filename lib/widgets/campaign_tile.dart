@@ -56,7 +56,7 @@ class CampaignTile extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.only(right: 2, bottom: 2),
-                  child: StatusWidget(Status.New),
+                  child: StatusWidget(this.campaign.status),
                 ),
               ),
             ],
