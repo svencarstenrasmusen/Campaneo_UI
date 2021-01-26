@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/information_detail_dialog.dart';
@@ -9,7 +9,8 @@ import 'package:campaneo_app/widgets/information_detail_dialog.dart';
 /// widgets can be displayed in.
 
 class InformationTile extends StatelessWidget {
-
+  
+  var random = new Random();
   final Icon icon;
   final int points;
   Color color = HexColor("#C4C4C4");
@@ -41,7 +42,7 @@ class InformationTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${this.points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
+                    Text("${(random.nextDouble() * (5 - 1) + 1).floor()} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
                     IconButton(
                         icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
