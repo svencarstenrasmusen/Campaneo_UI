@@ -21,6 +21,8 @@ class RankingPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               title: Text("${userList[index].getName}"),
+              leading: Icon(Icons.person),
+              trailing: Text("Campaigns:\t${userList[index].getCompletedCampaigns} \t"),
             );
           },
       ),
