@@ -58,9 +58,21 @@ class CampaignInfoDialog extends StatelessWidget {
               ),
             )
           ),
-          Text(this.campaignDetails.organization.address.toString(), style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-          Text(this.campaignDetails.organization.phone, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
-          Text(this.campaignDetails.organization.email, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                campaignerDetailRow(Icons.home, this.campaignDetails.organization.address.getPrintableAddress(), height),
+                campaignerDetailRow(Icons.phone, this.campaignDetails.organization.phone, height),
+                campaignerDetailRow(Icons.mail_outline, this.campaignDetails.organization.email, height)
+                //Text(this.campaignDetails.organization.address.getPrintableAddress(), style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                //Text(this.campaignDetails.organization.phone, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+                //Text(this.campaignDetails.organization.email, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+              ],
+            ),
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -70,6 +82,16 @@ class CampaignInfoDialog extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+  
+  Widget campaignerDetailRow(IconData iconData, String text, height) {
+    return Row(
+      children: [
+        Icon(iconData),
+        Container(width: 5),
+        Text(text, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
+      ],
     );
   }
 

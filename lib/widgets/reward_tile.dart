@@ -76,6 +76,7 @@ class RewardTile extends StatelessWidget {
             actions: <Widget>[
               FlatButton(onPressed: () {
                 userList[2].setPointsVoid(userList[2].getPoints - points);
+                Navigator.of(context).pop();
               },
                   child: Text("Confirm")
               ),
