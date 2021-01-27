@@ -38,7 +38,7 @@ class PointsAndRank extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(this.rankPosition, style: TextStyle(color: Colors.white, fontSize: height / 10)),
-                  Text("th", style: TextStyle(color: Colors.white, fontSize: height / 14)),
+                  Text("rd", style: TextStyle(color: Colors.white, fontSize: height / 14)),
                 ],
               ),
               Container(

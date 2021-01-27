@@ -11,12 +11,15 @@ import 'package:campaneo_app/widgets/information_detail_dialog.dart';
 class InformationTile extends StatelessWidget {
   
   var random = new Random();
-  final Icon icon;
-  final int points;
+  final IconData iconData;
+  Function(int) addPoints;
+  int points;
   Color color = HexColor("#C4C4C4");
   bool accepted = false;
 
-  InformationTile(this.icon, this.points);
+  InformationTile(this.iconData, this.addPoints) {
+    this.points = (random.nextDouble() * (5 - 1) + 1).floor();
+  }
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -38,11 +41,11 @@ class InformationTile extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(Icons.speed, size: width / 6, color: HexColor("#3C3C3C")),
+                Icon(this.iconData, size: width / 6, color: HexColor("#3C3C3C")),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${(random.nextDouble() * (5 - 1) + 1).floor()} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
+                    Text("${this.points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
                     IconButton(
                         icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
@@ -53,6 +56,7 @@ class InformationTile extends StatelessWidget {
             ),
           ),
           onTap: () {
+            this.addPoints(this.points);
             this.accepted = !this.accepted;
             (context as Element).markNeedsBuild();
           },

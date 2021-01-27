@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'pages.dart';
 import 'package:campaneo_app/pages/ranking_page.dart';
+import 'package:campaneo_app/faker/fake_users.dart';
+import 'package:campaneo_app/data/user.dart';
 
 
 class BasePage extends StatefulWidget {
@@ -16,9 +18,11 @@ class BasePage extends StatefulWidget {
 class _BasePageState extends State<BasePage> {
   int _selectedIndex = 0;
   Widget _selectedPage;
+  List<User> userList = new FakeUsers().getFakeUserList();
+
 
   _BasePageState() {
-    _selectedPage = HomePage(changeScreen);
+    _selectedPage = HomePage(changeScreen, userList);
     //_selectedPage = AllCampaignsPage();
   }
 
@@ -78,19 +82,19 @@ class _BasePageState extends State<BasePage> {
       _selectedIndex = x;
       switch(_selectedIndex) {
         case 0:
-          _selectedPage = HomePage(changeScreen);
+          _selectedPage = HomePage(changeScreen, userList);
           break;
         case 1:
-          _selectedPage = AllCampaignsPage();
+          _selectedPage = AllCampaignsPage(userList);
           break;
         case 2:
-          _selectedPage = ShopPage();
+          _selectedPage = ShopPage(userList);
           break;
         case 3:
           _selectedPage = SettingsPage();
           break;
         case 4:
-          _selectedPage = RankingPage();
+          _selectedPage = RankingPage(userList);
           break;
       }
     });

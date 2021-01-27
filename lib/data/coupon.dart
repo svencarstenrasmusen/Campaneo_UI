@@ -13,7 +13,7 @@ class Coupon {
     var random = new Random();
 
     this._reduction = random.nextInt(100);
-    this._cost = random.nextInt(1000);
+    this._cost = random.nextInt(400);
     this._type = couponType.values.elementAt(random.nextInt(4));
 
   }

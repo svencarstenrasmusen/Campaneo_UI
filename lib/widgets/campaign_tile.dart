@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
 import 'package:campaneo_app/widgets/campaign_info_dialog.dart';
 import 'package:campaneo_app/data/models.dart';
+import 'package:campaneo_app/data/user.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -16,8 +17,9 @@ class CampaignTile extends StatelessWidget {
   //final String title;
   AssetImage image;
   Status status;
+  List<User> userList;
 
-  CampaignTile(this.campaign);
+  CampaignTile(this.campaign, this.userList);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -61,16 +63,16 @@ class CampaignTile extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () => { showCampaignInfo(context) },
+          onTap: () => { showCampaignInfo(context, userList) },
         ),
       ),
     );
   }
 
-  showCampaignInfo(BuildContext context) {
+  showCampaignInfo(BuildContext context, List<User> userList) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => QueryableCampaignDetails(id: this.campaign.id)
+        builder: (BuildContext context) => QueryableCampaignDetails(userList, id: this.campaign.id)
     );
   }
 }

@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:campaneo_app/widgets/campaign_tile.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:campaneo_app/data/models.dart';
+import 'package:campaneo_app/data/user.dart';
 
 import '../data/campaign_fetch.dart';
 
 class AllCampaignsPage extends StatelessWidget {
   static const String routeName = '/allcampaigns';
   static const String pageTitle = 'AllCampaigns';
+  List<User> userList;
+
+  AllCampaignsPage(this.userList);
 
   //TODO: replace hardcoded tiles with actual tiles
   @override
@@ -43,7 +47,7 @@ class AllCampaignsPage extends StatelessWidget {
               childAspectRatio: 1.85
             ),
             itemBuilder: (BuildContext context, int index) =>
-              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index])),
+              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index]), userList),
           ),
         )
         : Container();

@@ -14,15 +14,19 @@ class User {
   int get getPoints => _points;
   int get getCompletedCampaigns => _completedCampaigns;
 
-  set setCompletedCampaigns(int value) {
+  void setCompletedCampaigns(int value) {
     _completedCampaigns = value;
   }
 
-  set setPoints(int value) {
+  void setPoints(int value) {
     _points = value;
   }
 
   set setName(String value) {
     _name = value;
+  }
+
+  void setPointsVoid(int i) {
+    _points = i;
   }
 }

@@ -20,7 +20,7 @@ class FakeUsers {
   User generateFakeUser() {
 
     String fakeName = "User: ${random.nextInt(100000)}";
-    int fakePoints = random.nextInt(10000);
+    int fakePoints = random.nextInt(500);
     int fakeCompletedCampaigns = random.nextInt(40);
 
     User fakeUser = User(fakeName, fakePoints, fakeCompletedCampaigns);

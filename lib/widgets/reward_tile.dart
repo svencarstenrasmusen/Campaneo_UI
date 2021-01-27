@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/data/coupon.dart';
+import 'package:campaneo_app/data/user.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -12,8 +13,9 @@ class RewardTile extends StatelessWidget {
   final int points;
   final int reductionPercentage;
   final Coupon coupon = new Coupon("Lorem ipsum...");
+  List<User> userList;
 
-  RewardTile(this.points, this.reductionPercentage);
+  RewardTile(this.points, this.reductionPercentage, this.userList);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -59,9 +61,31 @@ class RewardTile extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () => { print("reward tile pressed") },
+          onTap: () { showPurchaseDialog(context, this.coupon.getCost); },
         ),
       ),
+    );
+  }
+
+  showPurchaseDialog(BuildContext context, int points) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+            title: Text("Confirm Your Purchase"),
+            content: Text("Are you sure you want to purchase the coupon for $points points?"),
+            actions: <Widget>[
+              FlatButton(onPressed: () {
+                userList[2].setPointsVoid(userList[2].getPoints - points);
+              },
+                  child: Text("Confirm")
+              ),
+              FlatButton(onPressed: () {
+                Navigator.of(context).pop();
+              },
+                  child: Text("Cancel")
+              )
+            ]
+        )
     );
   }
 

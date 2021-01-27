@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:campaneo_app/widgets/information_selection_dialog.dart';
 import 'package:campaneo_app/widgets/queryable_campaign_details.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/data/models.dart';
+import 'package:campaneo_app/data/user.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -18,18 +20,20 @@ class CampaignInfoDialog extends StatelessWidget {
   final String email;*/
 
   final Campaign campaignDetails;
+  BuildContext context;
+  List<User> userList;
 
-  CampaignInfoDialog(@required this.campaignDetails);
+  CampaignInfoDialog(@required this.campaignDetails, this.context, this.userList);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Dialog(
       shape: BeveledRectangleBorder(),
       child: dialogContent(context),
     );
   }
 
-  Widget dialogContent(BuildContext context) {
+  Widget dialogContent(context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -79,7 +83,7 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("CONTINUE", style: TextStyle(fontSize: height / 10)),
           ),
-          onTap: () => { showInformationSelection(context) },
+          onTap: () => { showInformationSelection(context, userList) },
         ),
       ),
     );
@@ -95,16 +99,20 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("DECLINE", style: TextStyle(fontSize: height / 10)),
           ),
-          onTap: () => { print("tapped decline.") },
+          onTap: () {
+            this.campaignDetails.status = Status.Rejected;
+            (this.context as Element).markNeedsBuild();
+            Navigator.pop(context);
+          },
         ),
       ),
     );
   }
 
-  showInformationSelection(BuildContext context) {
+  showInformationSelection(BuildContext context, userList) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => InformationSelectionDialog()
+        builder: (BuildContext context) => InformationSelectionDialog(userList)
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:campaneo_app/data/models.dart';
 import 'package:campaneo_app/data/campaign_fetch.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:campaneo_app/data/user.dart';
 
 import 'package:campaneo_app/widgets/campaign_info_dialog.dart';
 
@@ -9,8 +10,8 @@ import 'campaign_info_dialog.dart';
 
 class QueryableCampaignDetails extends StatelessWidget {
   final String id;
-
-  QueryableCampaignDetails({@required this.id});
+  List<User> userList;
+  QueryableCampaignDetails(this.userList, {@required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class QueryableCampaignDetails extends StatelessWidget {
         final data = result.data['getCampaign2'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
         return CampaignInfoDialog(
-          campaignDetails
+          campaignDetails, context, userList
         );
       },
     );
