@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               MenuTile("Your Active Campaigns", CircleAvatar(
                 child: Text("${userList[2].getCompletedCampaigns}", style: TextStyle(fontSize: height / 6.5, color: Colors.white, fontWeight: FontWeight.bold)),
                 radius: height / 6.5,
-                backgroundColor: Colors.lightGreenAccent,
+                backgroundColor: Colors.lightGreen,
               ), null)
             ],
           ),

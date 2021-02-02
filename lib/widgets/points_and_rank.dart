@@ -32,7 +32,8 @@ class PointsAndRank extends StatelessWidget {
             width: 4,
             color: Colors.white,
           ),
-          Column(
+          Image.asset('assets/images/trophy.png', color: Colors.white, width: width/7,)
+          /**Column(
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,7 @@ class PointsAndRank extends StatelessWidget {
               ),
               Text(this.totalParticipants, style: TextStyle(color: Colors.white, fontSize: height / 10))
             ],
-          )
+          )*/
         ],
       ),
     );

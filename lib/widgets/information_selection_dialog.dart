@@ -22,8 +22,6 @@ class InformationSelectionDialog extends StatelessWidget {
     iconList.add(Icons.local_gas_station);
     iconList.add(Icons.alarm);
     iconList.add(Icons.location_on);
-    iconList.add(Icons.translate);
-    iconList.add(Icons.volume_up);
 
     return Dialog(
       shape: BeveledRectangleBorder(),
@@ -47,7 +45,7 @@ class InformationSelectionDialog extends StatelessWidget {
         children: [
           Scrollbar(
             child: GridView.builder(
-                itemCount: 7,
+                itemCount: 5,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 1.0

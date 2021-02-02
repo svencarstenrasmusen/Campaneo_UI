@@ -37,7 +37,7 @@ class AllCampaignsPage extends StatelessWidget {
         }
       // ignore: missing_return
 
-        List campaigns = result.data['getCreatedCampaigns2'];
+        List campaigns = result.data['getCampaigns'];
         return campaigns.isNotEmpty
             ? Scrollbar(
           child: GridView.builder(
