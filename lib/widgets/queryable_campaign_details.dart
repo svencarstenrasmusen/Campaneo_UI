@@ -11,11 +11,14 @@ import 'campaign_info_dialog.dart';
 class QueryableCampaignDetails extends StatelessWidget {
   final String id;
   List<User> userList;
+  List newCampaignsList;
   User currentUser;
-  QueryableCampaignDetails(this.currentUser, {@required this.id});
+  int index;
+  BuildContext context;
+  QueryableCampaignDetails(this.context, this.index, this.newCampaignsList, this.currentUser, {@required this.id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Query(
       options: QueryOptions(
         documentNode: gql(CampaignFetch.fetchById),
@@ -37,7 +40,7 @@ class QueryableCampaignDetails extends StatelessWidget {
         final data = result.data['getCampaign'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
         return CampaignInfoDialog(
-          campaignDetails, context, currentUser
+          campaignDetails, context, currentUser, newCampaignsList, index
         );
       },
     );

@@ -1,3 +1,4 @@
+import 'package:campaneo_app/pages/all_campaigns_page.dart';
 import 'package:campaneo_app/pages/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

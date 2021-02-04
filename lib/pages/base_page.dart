@@ -8,7 +8,7 @@ import 'pages.dart';
 import 'package:campaneo_app/pages/ranking_page.dart';
 import 'package:campaneo_app/faker/fake_users.dart';
 import 'package:campaneo_app/data/user.dart';
-
+import 'package:campaneo_app/data/models.dart';
 
 class BasePage extends StatefulWidget {
   @override
@@ -20,12 +20,13 @@ class _BasePageState extends State<BasePage> {
   Widget _selectedPage;
   List<User> userList = new FakeUsers().getFakeUserList();
   User currentUser = new User("You", 0, 0);
+  List<dynamic> newCampaignsList = new List();
 
 
 
   _BasePageState() {
     userList.add(currentUser);
-    _selectedPage = HomePage(changeScreen, this.currentUser);
+    _selectedPage = HomePage(changeScreen, this.currentUser, this.newCampaignsList);
     //_selectedPage = AllCampaignsPage();
   }
 
@@ -80,15 +81,14 @@ class _BasePageState extends State<BasePage> {
   }
 
   changeScreen(x) {
-    print("changing screen.");
     setState(() {
       _selectedIndex = x;
       switch(_selectedIndex) {
         case 0:
-          _selectedPage = HomePage(changeScreen, currentUser);
+          _selectedPage = HomePage(changeScreen, currentUser, newCampaignsList);
           break;
         case 1:
-          _selectedPage = AllCampaignsPage(currentUser);
+          _selectedPage = AllCampaignsPage(currentUser, newCampaignsList);
           break;
         case 2:
           _selectedPage = ShopPage(userList);
@@ -102,5 +102,4 @@ class _BasePageState extends State<BasePage> {
       }
     });
   }
-  //TODO: build page
 }

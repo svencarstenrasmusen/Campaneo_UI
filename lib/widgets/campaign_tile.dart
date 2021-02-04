@@ -18,14 +18,17 @@ class CampaignTile extends StatelessWidget {
   AssetImage image;
   Status status;
   List<User> userList;
+  List newCampaignsList;
   User currentUser;
+  int index;
+  BuildContext context;
 
-  CampaignTile(this.campaign, this.currentUser);
+  CampaignTile(this.context, this.index, this.newCampaignsList, this.campaign, this.currentUser);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -64,16 +67,16 @@ class CampaignTile extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () => { showCampaignInfo(context, currentUser) },
+          onTap: () => { showCampaignInfo(context, currentUser, newCampaignsList) },
         ),
       ),
     );
   }
 
-  showCampaignInfo(BuildContext context, User currentUser) {
+  showCampaignInfo(BuildContext context, User currentUser, List newCampaignsList) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => QueryableCampaignDetails(currentUser, id: this.campaign.id)
+        builder: (context) => QueryableCampaignDetails(context, index, newCampaignsList, currentUser, id: this.campaign.id)
     );
   }
 }

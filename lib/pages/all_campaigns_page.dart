@@ -12,47 +12,57 @@ class AllCampaignsPage extends StatelessWidget {
   static const String pageTitle = 'AllCampaigns';
   List<User> userList;
   User currentUser;
+  List<dynamic> newCampaignsList;
 
-  AllCampaignsPage(this.currentUser);
 
-  //TODO: replace hardcoded tiles with actual tiles
+  AllCampaignsPage(this.currentUser, this.newCampaignsList);
+
   @override
   Widget build(BuildContext context) {
-
-    return Query(
-      options: QueryOptions(
-        documentNode: gql(CampaignFetch.fetchAll),
+    return currentUser.newCampaigns.isEmpty
+        ? Query(
+        options: QueryOptions(
+          documentNode: gql(CampaignFetch.fetchAll),
+        ),
+        // ignore: missing_return
+        builder: (QueryResult result,
+            {VoidCallback refetch, FetchMore fetchMore}) {
+          if (result.hasException) {
+            return Text(result.exception.toString());
+          }
+          if (result.loading) {
+            return Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 5,
+              ),
+            );
+          }
+          // ignore: missing_return
+          currentUser.newCampaigns = result.data['getCampaigns'];
+          return currentUser.newCampaigns.isNotEmpty
+              ? Scrollbar(
+            child: GridView.builder(
+              itemCount: currentUser.newCampaigns.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.85
+              ),
+              itemBuilder: (context, int index) =>
+                  CampaignTile(context, index, currentUser.newCampaigns, Campaign.fromLazyCacheMap(currentUser.newCampaigns[index]), currentUser),
+            ),
+          )
+              : Container();
+        }
+    ) : Scrollbar(
+      child: GridView.builder(
+        itemCount: currentUser.newCampaigns.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1.85
+        ),
+        itemBuilder: (context, int index) =>
+            CampaignTile(context, index, currentUser.newCampaigns, Campaign.fromLazyCacheMap(currentUser.newCampaigns[index]), currentUser),
       ),
-      // ignore: missing_return
-      builder: (QueryResult result,
-        {VoidCallback refetch, FetchMore fetchMore}) {
-        if (result.hasException) {
-          return Text(result.exception.toString());
-        }
-        if (result.loading) {
-          return Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 5,
-            ),
-          );
-        }
-      // ignore: missing_return
-
-        List campaigns = result.data['getCampaigns'];
-        return campaigns.isNotEmpty
-            ? Scrollbar(
-          child: GridView.builder(
-            itemCount: campaigns.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 1.85
-            ),
-            itemBuilder: (BuildContext context, int index) =>
-              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index]), currentUser),
-          ),
-        )
-        : Container();
-      }
     );
 
     /**return MediaQuery.removePadding(

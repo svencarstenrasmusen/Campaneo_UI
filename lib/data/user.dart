@@ -1,8 +1,13 @@
+import 'package:campaneo_app/data/models.dart';
+
 class User {
 
   String _name;
   int _points;
   int _completedCampaigns;
+  List<Campaign> acceptedCampaigns = new List();
+  List<Campaign> rejectedCampaigns = new List();
+  List<dynamic> newCampaigns = new List();
 
   User(String name, int points, int completedCampaigns) {
     this._name = name;

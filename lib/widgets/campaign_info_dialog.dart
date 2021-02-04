@@ -19,15 +19,19 @@ class CampaignInfoDialog extends StatelessWidget {
   final String address;
   final String email;*/
 
-  final Campaign campaignDetails;
+  Campaign campaignDetails;
   BuildContext context;
   List<User> userList;
+  List newCampaignsList;
   User currentUser;
+  int index;
 
-  CampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser);
+  CampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index);
 
   @override
   Widget build(context) {
+    print("newCampaignsList size: ${newCampaignsList.length}.");
+    print("rejectedCampaignsList size: ${currentUser.rejectedCampaigns.length}.");
     return Dialog(
       shape: BeveledRectangleBorder(),
       child: dialogContent(context),
@@ -123,9 +127,12 @@ class CampaignInfoDialog extends StatelessWidget {
             child: Text("DECLINE", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () {
-            this.campaignDetails.status = Status.Rejected;
-            (this.context as Element).markNeedsBuild();
-            Navigator.pop(context);
+            campaignDetails.status = Status.Rejected;
+            currentUser.rejectedCampaigns.add(campaignDetails);
+            newCampaignsList.removeAt(index);
+            print("rejecting $index");
+            print("size: ${newCampaignsList.length}");
+            Navigator.popAndPushNamed(context, "/allcampaigns");
           },
         ),
       ),

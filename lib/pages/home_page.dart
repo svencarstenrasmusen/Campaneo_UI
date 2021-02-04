@@ -11,8 +11,9 @@ class HomePage extends StatelessWidget {
   Function(int) changeScreen;
   List<User> userList;
   User currentUser;
+  List newCampaignsList;
 
-  HomePage(this.changeScreen, this.currentUser);
+  HomePage(this.changeScreen, this.currentUser, this.newCampaignsList);
 
   @override
   Widget build(BuildContext context) {
