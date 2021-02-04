@@ -10,10 +10,11 @@ class InformationSelectionDialog extends StatelessWidget {
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
   List<IconData> iconList = new List();
-  List<User> userList;
+  // List<User> userList;
+  User currentUser;
   int combinedPoints = 0;
 
-  InformationSelectionDialog(this.userList);
+  InformationSelectionDialog(this.currentUser);
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +78,8 @@ class InformationSelectionDialog extends StatelessWidget {
             child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 20)),
           ),
           onTap: () {
-            userList[2].setCompletedCampaigns(userList[2].getCompletedCampaigns+1);
-            userList[2].setPoints(userList[2].getPoints + this.combinedPoints);
+            currentUser.setCompletedCampaigns(currentUser.getCompletedCampaigns+1);
+            currentUser.setPoints(currentUser.getPoints + this.combinedPoints);
             Navigator.of(context).pop();
             Navigator.of(context).pop();
 

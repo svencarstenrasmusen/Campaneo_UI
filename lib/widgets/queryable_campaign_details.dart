@@ -11,7 +11,8 @@ import 'campaign_info_dialog.dart';
 class QueryableCampaignDetails extends StatelessWidget {
   final String id;
   List<User> userList;
-  QueryableCampaignDetails(this.userList, {@required this.id});
+  User currentUser;
+  QueryableCampaignDetails(this.currentUser, {@required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class QueryableCampaignDetails extends StatelessWidget {
         final data = result.data['getCampaign'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
         return CampaignInfoDialog(
-          campaignDetails, context, userList
+          campaignDetails, context, currentUser
         );
       },
     );

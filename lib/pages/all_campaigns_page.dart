@@ -11,8 +11,9 @@ class AllCampaignsPage extends StatelessWidget {
   static const String routeName = '/allcampaigns';
   static const String pageTitle = 'AllCampaigns';
   List<User> userList;
+  User currentUser;
 
-  AllCampaignsPage(this.userList);
+  AllCampaignsPage(this.currentUser);
 
   //TODO: replace hardcoded tiles with actual tiles
   @override
@@ -47,7 +48,7 @@ class AllCampaignsPage extends StatelessWidget {
               childAspectRatio: 1.85
             ),
             itemBuilder: (BuildContext context, int index) =>
-              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index]), userList),
+              CampaignTile(Campaign.fromLazyCacheMap(campaigns[index]), currentUser),
           ),
         )
         : Container();

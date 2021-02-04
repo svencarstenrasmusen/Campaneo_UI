@@ -22,8 +22,9 @@ class CampaignInfoDialog extends StatelessWidget {
   final Campaign campaignDetails;
   BuildContext context;
   List<User> userList;
+  User currentUser;
 
-  CampaignInfoDialog(@required this.campaignDetails, this.context, this.userList);
+  CampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser);
 
   @override
   Widget build(context) {
@@ -105,7 +106,7 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("CONTINUE", style: TextStyle(fontSize: height / 10)),
           ),
-          onTap: () => { showInformationSelection(context, userList) },
+          onTap: () => { showInformationSelection(context, currentUser) },
         ),
       ),
     );

@@ -18,8 +18,9 @@ class CampaignTile extends StatelessWidget {
   AssetImage image;
   Status status;
   List<User> userList;
+  User currentUser;
 
-  CampaignTile(this.campaign, this.userList);
+  CampaignTile(this.campaign, this.currentUser);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -63,16 +64,16 @@ class CampaignTile extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () => { showCampaignInfo(context, userList) },
+          onTap: () => { showCampaignInfo(context, currentUser) },
         ),
       ),
     );
   }
 
-  showCampaignInfo(BuildContext context, List<User> userList) {
+  showCampaignInfo(BuildContext context, User currentUser) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => QueryableCampaignDetails(userList, id: this.campaign.id)
+        builder: (BuildContext context) => QueryableCampaignDetails(currentUser, id: this.campaign.id)
     );
   }
 }

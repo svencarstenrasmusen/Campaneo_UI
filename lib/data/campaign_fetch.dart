@@ -4,8 +4,6 @@ class CampaignFetch {
       getCampaigns {
         id
         name
-        valid_from
-        valid_to
       } 
     }
   """;

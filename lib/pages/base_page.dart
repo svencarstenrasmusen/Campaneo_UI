@@ -19,10 +19,13 @@ class _BasePageState extends State<BasePage> {
   int _selectedIndex = 0;
   Widget _selectedPage;
   List<User> userList = new FakeUsers().getFakeUserList();
+  User currentUser = new User("You", 0, 0);
+
 
 
   _BasePageState() {
-    _selectedPage = HomePage(changeScreen, userList);
+    userList.add(currentUser);
+    _selectedPage = HomePage(changeScreen, this.currentUser);
     //_selectedPage = AllCampaignsPage();
   }
 
@@ -82,10 +85,10 @@ class _BasePageState extends State<BasePage> {
       _selectedIndex = x;
       switch(_selectedIndex) {
         case 0:
-          _selectedPage = HomePage(changeScreen, userList);
+          _selectedPage = HomePage(changeScreen, currentUser);
           break;
         case 1:
-          _selectedPage = AllCampaignsPage(userList);
+          _selectedPage = AllCampaignsPage(currentUser);
           break;
         case 2:
           _selectedPage = ShopPage(userList);
@@ -94,7 +97,7 @@ class _BasePageState extends State<BasePage> {
           _selectedPage = SettingsPage();
           break;
         case 4:
-          _selectedPage = RankingPage(userList);
+          _selectedPage = RankingPage(userList, currentUser);
           break;
       }
     });

@@ -9,13 +9,14 @@ class RankingPage extends StatelessWidget {
   static const String pageTitle = 'Ranking';
 
   List<User> userList;
+  User currentUser;
 
-  RankingPage(this.userList);
+  RankingPage(this.userList, this.currentUser);
 
   @override
   Widget build(BuildContext context) {
-    print("UserList: $userList");
-
+    this.userList.sort((a,b) => b.getCompletedCampaigns.compareTo(a.getCompletedCampaigns));
+    int currentUserIndex = this.userList.indexOf(this.currentUser);
     return Container(
       child: ListView.builder(
         itemCount: userList.length,
@@ -24,7 +25,7 @@ class RankingPage extends StatelessWidget {
               title: Text("${userList[index].getName}"),
               leading: Icon(Icons.person),
               trailing: Text("Campaigns:\t${userList[index].getCompletedCampaigns} \t"),
-              tileColor: index==2? Colors.green : null,
+              tileColor: index==currentUserIndex? Colors.green : null,
             );
           },
       ),
