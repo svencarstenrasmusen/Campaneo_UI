@@ -38,7 +38,10 @@ class AllCampaignsPage extends StatelessWidget {
             );
           }
           // ignore: missing_return
-          currentUser.newCampaigns = result.data['getCampaigns'];
+          List newCampaigns = result.data['getCampaigns'];
+          for (int i = 0; i < newCampaigns.length; i++) {
+            currentUser.newCampaigns.add(Campaign.fromLazyCacheMap(newCampaigns[i]));
+          }
           return currentUser.newCampaigns.isNotEmpty
               ? Scrollbar(
             child: GridView.builder(
@@ -48,7 +51,7 @@ class AllCampaignsPage extends StatelessWidget {
                   childAspectRatio: 1.85
               ),
               itemBuilder: (context, int index) =>
-                  CampaignTile(context, index, currentUser.newCampaigns, Campaign.fromLazyCacheMap(currentUser.newCampaigns[index]), currentUser),
+                  CampaignTile(context, index, currentUser.newCampaigns, currentUser.newCampaigns[index], currentUser),
             ),
           )
               : Container();
@@ -61,7 +64,7 @@ class AllCampaignsPage extends StatelessWidget {
             childAspectRatio: 1.85
         ),
         itemBuilder: (context, int index) =>
-            CampaignTile(context, index, currentUser.newCampaigns, Campaign.fromLazyCacheMap(currentUser.newCampaigns[index]), currentUser),
+            CampaignTile(context, index, currentUser.newCampaigns, currentUser.newCampaigns[index], currentUser),
       ),
     );
 
