@@ -1,5 +1,6 @@
 import 'package:campaneo_app/data/models.dart';
 import 'package:campaneo_app/data/campaign_fetch.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:campaneo_app/data/user.dart';
@@ -15,7 +16,9 @@ class QueryableCampaignDetails extends StatelessWidget {
   User currentUser;
   int index;
   BuildContext context;
-  QueryableCampaignDetails(this.context, this.index, this.newCampaignsList, this.currentUser, {@required this.id});
+  Function statusCallback;
+
+  QueryableCampaignDetails(this.context, this.index, this.newCampaignsList, this.currentUser, this.statusCallback, {@required this.id});
 
   @override
   Widget build(context) {
@@ -40,7 +43,7 @@ class QueryableCampaignDetails extends StatelessWidget {
         final data = result.data['getCampaign'];
         final campaignDetails = Campaign.fromLazyCacheMap(data);
         return CampaignInfoDialog(
-          campaignDetails, context, currentUser, newCampaignsList, index
+          campaignDetails, context, currentUser, newCampaignsList, index, statusCallback
         );
       },
     );

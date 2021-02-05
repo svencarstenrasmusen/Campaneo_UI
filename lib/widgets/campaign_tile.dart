@@ -11,13 +11,10 @@ import 'package:campaneo_app/data/user.dart';
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
 
-class CampaignTile extends StatelessWidget {
+class CampaignTile extends StatefulWidget {
 
-  final Campaign campaign;
+  Campaign campaign;
   //final String title;
-  AssetImage image;
-  Status status;
-  List<User> userList;
   List newCampaignsList;
   User currentUser;
   int index;
@@ -25,7 +22,16 @@ class CampaignTile extends StatelessWidget {
 
   CampaignTile(this.context, this.index, this.newCampaignsList, this.campaign, this.currentUser);
 
-  //TODO: add ontap-function, all tiles have a different screen to navigate to
+  @override
+  _CampaignTileState createState() => _CampaignTileState();
+}
+
+class _CampaignTileState extends State<CampaignTile> {
+  AssetImage image;
+
+  Status status;
+
+  List<User> userList;
 
   @override
   Widget build(context) {
@@ -56,27 +62,33 @@ class CampaignTile extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Text(this.campaign.name, style: TextStyle(color: Colors.white, fontSize: height / 20), softWrap: false, overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center),
+                child: Text(this.widget.campaign.name, style: TextStyle(color: Colors.white, fontSize: height / 20), softWrap: false, overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center),
               ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.only(right: 2, bottom: 2),
-                  child: StatusWidget(this.campaign.status),
+                  child: StatusWidget(this.widget.campaign.status),
                 ),
               ),
             ],
           ),
-          onTap: () => { showCampaignInfo(context, currentUser, newCampaignsList) },
+          onTap: () => { showCampaignInfo(context, widget.currentUser, widget.newCampaignsList) },
         ),
       ),
     );
   }
 
+  void updateStatus(Status status) {
+    setState(() {
+      this.widget.campaign.status = status;
+    });
+  }
+
   showCampaignInfo(BuildContext context, User currentUser, List newCampaignsList) {
     showDialog(
         context: context,
-        builder: (context) => QueryableCampaignDetails(context, index, newCampaignsList, currentUser, id: this.campaign.id)
+        builder: (context) => QueryableCampaignDetails(context, widget.index, newCampaignsList, currentUser, updateStatus, id: this.widget.campaign.id)
     );
   }
 }

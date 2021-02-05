@@ -25,8 +25,9 @@ class CampaignInfoDialog extends StatelessWidget {
   List newCampaignsList;
   User currentUser;
   int index;
+  Function statusCallback;
 
-  CampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index);
+  CampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index, this.statusCallback);
 
   @override
   Widget build(context) {
@@ -110,7 +111,7 @@ class CampaignInfoDialog extends StatelessWidget {
           child: Center(
             child: Text("CONTINUE", style: TextStyle(fontSize: height / 10)),
           ),
-          onTap: () => { showInformationSelection(context, currentUser) },
+          onTap: () => { showInformationSelection(context, currentUser, statusCallback) },
         ),
       ),
     );
@@ -129,20 +130,21 @@ class CampaignInfoDialog extends StatelessWidget {
           onTap: () {
             campaignDetails.status = Status.Rejected;
             currentUser.rejectedCampaigns.add(campaignDetails);
-            newCampaignsList.removeAt(index);
+            //newCampaignsList.removeAt(index);
+            statusCallback(Status.Rejected);
             print("rejecting $index");
             print("size: ${newCampaignsList.length}");
-            Navigator.popAndPushNamed(context, "/allcampaigns");
+            Navigator.of(context).pop();
           },
         ),
       ),
     );
   }
 
-  showInformationSelection(BuildContext context, userList) {
+  showInformationSelection(BuildContext context, userList, Function callback) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => InformationSelectionDialog(userList)
+        builder: (BuildContext context) => InformationSelectionDialog(userList, callback)
     );
   }
 

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/information_tile.dart';
 import 'package:campaneo_app/data/user.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
-
 class InformationSelectionDialog extends StatelessWidget {
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
@@ -13,8 +13,9 @@ class InformationSelectionDialog extends StatelessWidget {
   // List<User> userList;
   User currentUser;
   int combinedPoints = 0;
+  Function statusCallback;
 
-  InformationSelectionDialog(this.currentUser);
+  InformationSelectionDialog(this.currentUser, this.statusCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,7 @@ class InformationSelectionDialog extends StatelessWidget {
           onTap: () {
             currentUser.setCompletedCampaigns(currentUser.getCompletedCampaigns+1);
             currentUser.setPoints(currentUser.getPoints + this.combinedPoints);
+            statusCallback(Status.Accepted);
             Navigator.of(context).pop();
             Navigator.of(context).pop();
 

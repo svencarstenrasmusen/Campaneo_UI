@@ -18,7 +18,7 @@ class InformationTile extends StatelessWidget {
   bool accepted = false;
 
   InformationTile(this.iconData, this.addPoints) {
-    this.points = (random.nextDouble() * (5 - 1) + 1).floor();
+    this.points = (random.nextDouble() * (10 - 1) + 1).floor();
   }
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
