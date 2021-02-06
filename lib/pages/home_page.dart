@@ -29,10 +29,10 @@ class HomePage extends StatelessWidget {
               //TODO: change textStyle according to theme automatically
               MenuTile("Your Vehicle",  Icon(Icons.directions_car, size: iconSize, color: Colors.white), () { print("tapped YOUR VEHICLE");}),
               MenuTile("Your Active Campaigns", CircleAvatar(
-                child: Text("${currentUser.getCompletedCampaigns}", style: TextStyle(fontSize: height / 6.5, color: Colors.white, fontWeight: FontWeight.bold)),
+                child: Text("${currentUser.acceptedCampaigns.length}", style: TextStyle(fontSize: height / 6.5, color: Colors.white, fontWeight: FontWeight.bold)),
                 radius: height / 6.5,
                 backgroundColor: Colors.lightGreen,
-              ), null)
+              ), () {changeScreen(5);})
             ],
           ),
           Row(

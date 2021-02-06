@@ -82,6 +82,14 @@ class _CampaignTileState extends State<CampaignTile> {
   void updateStatus(Status status) {
     setState(() {
       this.widget.campaign.status = status;
+      if(status == Status.Rejected) {
+        this.widget.currentUser.rejectedCampaigns.add(this.widget.campaign);
+
+      }
+      else if(status == Status.Accepted) {
+        this.widget.currentUser.acceptedCampaigns.add(this.widget.campaign);
+      }
+
     });
   }
 

@@ -83,12 +83,23 @@ class CampaignInfoDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               continueButton(context, height, width),
-              declineButton(context, height, width)
+              isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
             ],
           ),
         ],
       ),
     );
+  }
+
+  bool isAcceptedCampaign() {
+    if(currentUser.acceptedCampaigns.length > 0) {
+      if (currentUser.acceptedCampaigns[index].id.compareTo(campaignDetails.id) == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
   }
   
   Widget campaignerDetailRow(IconData iconData, String text, height) {
@@ -130,6 +141,31 @@ class CampaignInfoDialog extends StatelessWidget {
           onTap: () {
             campaignDetails.status = Status.Rejected;
             currentUser.rejectedCampaigns.add(campaignDetails);
+            //newCampaignsList.removeAt(index);
+            statusCallback(Status.Rejected);
+            print("rejecting $index");
+            print("size: ${newCampaignsList.length}");
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget revokeButton(BuildContext context, double height, double width) {
+    return Container(
+      height: height * 0.15,
+      width: width * 0.25,
+      child: Material(
+        color: Colors.deepOrangeAccent,
+        child: InkWell(
+          child: Center(
+            child: Text("REVOKE", style: TextStyle(fontSize: height / 10)),
+          ),
+          onTap: () {
+            campaignDetails.status = Status.Rejected;
+            currentUser.rejectedCampaigns.add(campaignDetails);
+            currentUser.acceptedCampaigns.removeAt(index);
             //newCampaignsList.removeAt(index);
             statusCallback(Status.Rejected);
             print("rejecting $index");
