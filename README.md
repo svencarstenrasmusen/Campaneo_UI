@@ -6,7 +6,7 @@ An application to build a trusted platform for sensor data sharing.
 
 - Differentiate ActiveCampaign page and NewCampaignPage by listing only the requested campaigns.
 - Adjust themeManager to the user's entered colour theme.
-- Connect to the GraphQL and use that data for the application as soon as the design is good.
+- Edit Campaign class to have specific sensors. Currently the sensors are given from outside.
 
 Flutter Documentation for further help:
 [online documentation](https://flutter.dev/docs), which offers tutorials,
