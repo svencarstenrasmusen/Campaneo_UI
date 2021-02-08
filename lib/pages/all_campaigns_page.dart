@@ -7,10 +7,9 @@ import 'package:campaneo_app/data/user.dart';
 
 import '../data/campaign_fetch.dart';
 
-class AllCampaignsPage extends StatelessWidget {
+class AllCampaignsPage extends StatefulWidget {
   static const String routeName = '/allcampaigns';
   static const String pageTitle = 'AllCampaigns';
-  List<User> userList;
   User currentUser;
   List<dynamic> newCampaignsList;
 
@@ -18,8 +17,15 @@ class AllCampaignsPage extends StatelessWidget {
   AllCampaignsPage(this.currentUser, this.newCampaignsList);
 
   @override
+  _AllCampaignsPageState createState() => _AllCampaignsPageState();
+}
+
+class _AllCampaignsPageState extends State<AllCampaignsPage> {
+  List<User> userList;
+
+  @override
   Widget build(BuildContext context) {
-    return currentUser.newCampaigns.isEmpty
+    return widget.currentUser.newCampaigns.isEmpty
         ? Query(
         options: QueryOptions(
           documentNode: gql(CampaignFetch.fetchAll),
@@ -40,31 +46,31 @@ class AllCampaignsPage extends StatelessWidget {
           // ignore: missing_return
           List newCampaigns = result.data['getCampaigns'];
           for (int i = 0; i < newCampaigns.length; i++) {
-            currentUser.newCampaigns.add(Campaign.fromLazyCacheMap(newCampaigns[i]));
+            widget.currentUser.newCampaigns.add(Campaign.fromLazyCacheMap(newCampaigns[i]));
           }
-          return currentUser.newCampaigns.isNotEmpty
+          return widget.currentUser.newCampaigns.isNotEmpty
               ? Scrollbar(
             child: GridView.builder(
-              itemCount: currentUser.newCampaigns.length,
+              itemCount: widget.currentUser.newCampaigns.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 1.85
               ),
               itemBuilder: (context, int index) =>
-                  CampaignTile(context, index, currentUser.newCampaigns[index], currentUser),
+                  CampaignTile(context, index, widget.currentUser.newCampaigns[index], widget.currentUser, updateList),
             ),
           )
               : Container();
         }
     ) : Scrollbar(
       child: GridView.builder(
-        itemCount: currentUser.newCampaigns.length,
+        itemCount: widget.currentUser.newCampaigns.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 1.85
         ),
         itemBuilder: (context, int index) =>
-            CampaignTile(context, index, currentUser.newCampaigns[index], currentUser),
+            CampaignTile(context, index, widget.currentUser.newCampaigns[index], widget.currentUser, updateList),
       ),
     );
 
@@ -83,4 +89,11 @@ class AllCampaignsPage extends StatelessWidget {
         ),
     );*/
   }
+
+  updateList() {
+    setState(() {
+      widget.currentUser.newCampaigns = widget.currentUser.newCampaigns;
+    });
+  }
+
 }

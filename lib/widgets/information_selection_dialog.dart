@@ -104,7 +104,7 @@ class _InformationSelectionDialogState extends State<InformationSelectionDialog>
             if(this.combinedPoints > 0) {
               widget.currentUser.setCompletedCampaigns(widget.currentUser.getCompletedCampaigns+1);
               widget.currentUser.setPoints(widget.currentUser.getPoints + this.combinedPoints);
-              //statusCallback(Status.Accepted);
+              widget.statusCallback(Status.Accepted);
               //currentUser.newCampaigns[campaignListIndex].status = Status.Accepted;
               widget.currentUser.newCampaigns.removeAt(widget.campaignListIndex);
               widget.campaignDetails.status = Status.Accepted;

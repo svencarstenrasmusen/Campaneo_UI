@@ -7,26 +7,38 @@ import 'package:campaneo_app/data/user.dart';
 
 import '../data/campaign_fetch.dart';
 
-class ActiveCampaignsPage extends StatelessWidget {
+class ActiveCampaignsPage extends StatefulWidget {
   static const String routeName = '/activecampaigns';
   static const String pageTitle = 'ActiveCampaigns';
-  List<User> userList;
   User currentUser;
 
   ActiveCampaignsPage(this.currentUser);
 
   @override
+  _ActiveCampaignsPageState createState() => _ActiveCampaignsPageState();
+}
+
+class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
+  List<User> userList;
+
+  @override
   Widget build(BuildContext context) {
     return Scrollbar(
       child: GridView.builder(
-        itemCount: currentUser.acceptedCampaigns.length,
+        itemCount: widget.currentUser.acceptedCampaigns.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 1.85
         ),
         itemBuilder: (context, int index) =>
-            CampaignTile(context, index, currentUser.acceptedCampaigns[index], currentUser),
+            CampaignTile(context, index, widget.currentUser.acceptedCampaigns[index], widget.currentUser, updateList),
       ),
     );
+  }
+
+  updateList() {
+    setState(() {
+      widget.currentUser.acceptedCampaigns = widget.currentUser.acceptedCampaigns;
+    });
   }
 }

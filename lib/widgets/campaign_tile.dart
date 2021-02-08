@@ -19,8 +19,9 @@ class CampaignTile extends StatefulWidget {
   User currentUser;
   int index;
   BuildContext context;
+  Function callback;
 
-  CampaignTile(this.context, this.index, this.campaign, this.currentUser);
+  CampaignTile(this.context, this.index, this.campaign, this.currentUser, this.callback);
 
   @override
   _CampaignTileState createState() => _CampaignTileState();
@@ -94,8 +95,10 @@ class _CampaignTileState extends State<CampaignTile> {
       //this.widget.currentUser.newCampaigns[this.widget.index].status = status;
       if(status == Status.Rejected) {
         this.widget.currentUser.rejectedCampaigns.add(this.widget.campaign);
+        widget.callback();
       }
       else if(status == Status.Accepted) {
+        widget.callback();
         //this.widget.currentUser.acceptedCampaigns.add(this.widget.campaign);
       }
 
