@@ -51,7 +51,7 @@ class AllCampaignsPage extends StatelessWidget {
                   childAspectRatio: 1.85
               ),
               itemBuilder: (context, int index) =>
-                  CampaignTile(context, index, currentUser.newCampaigns, currentUser.newCampaigns[index], currentUser),
+                  CampaignTile(context, index, currentUser.newCampaigns[index], currentUser),
             ),
           )
               : Container();
@@ -64,7 +64,7 @@ class AllCampaignsPage extends StatelessWidget {
             childAspectRatio: 1.85
         ),
         itemBuilder: (context, int index) =>
-            CampaignTile(context, index, currentUser.newCampaigns, currentUser.newCampaigns[index], currentUser),
+            CampaignTile(context, index, currentUser.newCampaigns[index], currentUser),
       ),
     );
 

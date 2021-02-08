@@ -4,7 +4,7 @@ import 'package:campaneo_app/widgets/queryable_campaign_details.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
-import 'package:campaneo_app/widgets/campaign_info_dialog.dart';
+import 'package:campaneo_app/widgets/active_campaign_info_dialog.dart';
 import 'package:campaneo_app/data/models.dart';
 import 'package:campaneo_app/data/user.dart';
 
@@ -20,7 +20,7 @@ class CampaignTile extends StatefulWidget {
   int index;
   BuildContext context;
 
-  CampaignTile(this.context, this.index, this.newCampaignsList, this.campaign, this.currentUser);
+  CampaignTile(this.context, this.index, this.campaign, this.currentUser);
 
   @override
   _CampaignTileState createState() => _CampaignTileState();
@@ -73,21 +73,30 @@ class _CampaignTileState extends State<CampaignTile> {
               ),
             ],
           ),
-          onTap: () => { showCampaignInfo(context, widget.currentUser, widget.newCampaignsList) },
+          onTap: () => { showCorrectDialog() },
         ),
       ),
     );
   }
 
+  bool isActiveCampaign() {
+    print("Active campaign: ${widget.campaign.status}");
+    if(widget.campaign.status == Status.Accepted) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void updateStatus(Status status) {
     setState(() {
       this.widget.campaign.status = status;
+      //this.widget.currentUser.newCampaigns[this.widget.index].status = status;
       if(status == Status.Rejected) {
         this.widget.currentUser.rejectedCampaigns.add(this.widget.campaign);
-
       }
       else if(status == Status.Accepted) {
-        this.widget.currentUser.acceptedCampaigns.add(this.widget.campaign);
+        //this.widget.currentUser.acceptedCampaigns.add(this.widget.campaign);
       }
 
     });
@@ -96,7 +105,24 @@ class _CampaignTileState extends State<CampaignTile> {
   showCampaignInfo(BuildContext context, User currentUser, List newCampaignsList) {
     showDialog(
         context: context,
-        builder: (context) => QueryableCampaignDetails(context, widget.index, newCampaignsList, currentUser, updateStatus, id: this.widget.campaign.id)
+        builder: (context) => QueryableCampaignDetails(context, widget.index, newCampaignsList, currentUser, updateStatus, id: widget.campaign.id)
     );
+  }
+
+  showActiveCampaignInfo(BuildContext context, User currentUser) {
+    showDialog(
+      context: context,
+      builder: (context) => ActiveCampaignInfoDialog(
+          widget.campaign, context, currentUser, widget.newCampaignsList, widget.index, updateStatus
+      )
+    );
+  }
+
+  showCorrectDialog() {
+    if(isActiveCampaign() == true) {
+      showActiveCampaignInfo(context, widget.currentUser);
+    } else {
+      showCampaignInfo(context, widget.currentUser, widget.newCampaignsList);
+    }
   }
 }

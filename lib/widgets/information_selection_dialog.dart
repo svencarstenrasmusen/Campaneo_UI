@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/information_tile.dart';
 import 'package:campaneo_app/data/user.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
+import 'package:campaneo_app/data/models.dart';
 
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
@@ -14,8 +15,10 @@ class InformationSelectionDialog extends StatelessWidget {
   User currentUser;
   int combinedPoints = 0;
   Function statusCallback;
+  int campaignListIndex;
+  Campaign campaignDetails;
 
-  InformationSelectionDialog(this.currentUser, this.statusCallback);
+  InformationSelectionDialog(this.currentUser, this.statusCallback, this.campaignListIndex, this.campaignDetails);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class InformationSelectionDialog extends StatelessWidget {
                     crossAxisCount: 3,
                     childAspectRatio: 1.0
                 ),
-                itemBuilder: (BuildContext context, int index) => InformationTile(iconList[index], incrementPoints)
+                itemBuilder: (BuildContext context, int index) => InformationTile(iconList[index], incrementPoints, currentUser, this.campaignListIndex, index)
             ),
           ),
           Container(
@@ -81,7 +84,11 @@ class InformationSelectionDialog extends StatelessWidget {
           onTap: () {
             currentUser.setCompletedCampaigns(currentUser.getCompletedCampaigns+1);
             currentUser.setPoints(currentUser.getPoints + this.combinedPoints);
-            statusCallback(Status.Accepted);
+            //statusCallback(Status.Accepted);
+            //currentUser.newCampaigns[campaignListIndex].status = Status.Accepted;
+            currentUser.newCampaigns.removeAt(campaignListIndex);
+            campaignDetails.status = Status.Accepted;
+            currentUser.acceptedCampaigns.add(campaignDetails);
             Navigator.of(context).pop();
             Navigator.of(context).pop();
 

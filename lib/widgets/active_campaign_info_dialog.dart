@@ -10,14 +10,7 @@ import 'package:campaneo_app/data/user.dart';
 /// This widget acts as a tile button for the homepage screen. Where other
 /// widgets can be displayed in.
 
-class CampaignInfoDialog extends StatelessWidget {
-
-  /**final String campaigner;
-  final String title;
-  final String description;
-  final String phoneNumber;
-  final String address;
-  final String email;*/
+class ActiveCampaignInfoDialog extends StatelessWidget {
 
   Campaign campaignDetails;
   BuildContext context;
@@ -27,7 +20,7 @@ class CampaignInfoDialog extends StatelessWidget {
   int index;
   Function statusCallback;
 
-  CampaignInfoDialog(this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index, this.statusCallback);
+  ActiveCampaignInfoDialog(@required this.campaignDetails, this.context, this.currentUser, this.newCampaignsList, this.index, this.statusCallback);
 
   @override
   Widget build(context) {
@@ -54,13 +47,13 @@ class CampaignInfoDialog extends StatelessWidget {
           Text(this.campaignDetails.name, style: TextStyle(fontSize: height / 20, color: Colors.white70), textAlign: TextAlign.center),
           Text(this.campaignDetails.organization.name, style: TextStyle(fontSize: height / 40, color: Colors.white70)),
           Container(
-            height: height * 0.3,
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
-                scrollDirection: Axis.vertical,
-              ),
-            )
+              height: height * 0.3,
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Text(this.campaignDetails.description, style: TextStyle(fontSize: height / 30, color: Colors.white70)),
+                  scrollDirection: Axis.vertical,
+                ),
+              )
           ),
           Container(
             alignment: Alignment.centerLeft,
@@ -81,7 +74,7 @@ class CampaignInfoDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               continueButton(context, height, width),
-              isAcceptedCampaign()? revokeButton(context, height, width) : declineButton(context, height, width)
+              revokeButton(context, height, width)
             ],
           ),
         ],
@@ -89,17 +82,7 @@ class CampaignInfoDialog extends StatelessWidget {
     );
   }
 
-  bool isAcceptedCampaign() {
-    if(currentUser.acceptedCampaigns.length > 0) {
-      if (currentUser.acceptedCampaigns.any((element) => element.id == campaignDetails.id) == true) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    return false;
-  }
-  
+
   Widget campaignerDetailRow(IconData iconData, String text, height) {
     return Row(
       children: [
@@ -126,26 +109,6 @@ class CampaignInfoDialog extends StatelessWidget {
     );
   }
 
-  Widget declineButton(BuildContext context, double height, double width) {
-    return Container(
-      height: height * 0.15,
-      width: width * 0.25,
-      child: Material(
-        color: Colors.red,
-        child: InkWell(
-          child: Center(
-            child: Text("DECLINE", style: TextStyle(fontSize: height / 10)),
-          ),
-          onTap: () {
-            campaignDetails.status = Status.Rejected;
-            statusCallback(Status.Rejected);
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-    );
-  }
-
   Widget revokeButton(BuildContext context, double height, double width) {
     return Container(
       height: height * 0.15,
@@ -159,6 +122,7 @@ class CampaignInfoDialog extends StatelessWidget {
           onTap: () {
             campaignDetails.status = Status.Rejected;
             currentUser.acceptedCampaigns.removeAt(index);
+            currentUser.newCampaigns.add(campaignDetails);
             statusCallback(Status.Rejected);
             Navigator.of(context).pop();
           },

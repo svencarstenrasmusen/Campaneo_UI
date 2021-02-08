@@ -1,8 +1,6 @@
 import 'package:campaneo_app/data/user.dart';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-
 /// CLass to create a fake list of users, for the demo.
 class FakeUsers {
   int numberOfUsers = 21;

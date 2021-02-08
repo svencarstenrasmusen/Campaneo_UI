@@ -1,8 +1,10 @@
 import 'dart:ui';
 import 'dart:math';
+import 'package:campaneo_app/data/models.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/information_detail_dialog.dart';
+import 'package:campaneo_app/data/user.dart';
 
 
 /// This widget acts as a tile button for the homepage screen. Where other
@@ -15,10 +17,16 @@ class InformationTile extends StatelessWidget {
   Function(int) addPoints;
   int points;
   Color color = HexColor("#C4C4C4");
-  bool accepted = false;
+  bool selected = false;
+  User currentUser;
+  int campaignListIndex;
+  int index;
+  Campaign currentCampaign;
 
-  InformationTile(this.iconData, this.addPoints) {
+  InformationTile(this.iconData, this.addPoints, this.currentUser, this.campaignListIndex, this.index) {
     this.points = (random.nextDouble() * (10 - 1) + 1).floor();
+    currentCampaign = currentUser.newCampaigns[campaignListIndex];
+    this.selected = currentCampaign.sensorList[index].selected;
   }
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
@@ -33,7 +41,7 @@ class InformationTile extends StatelessWidget {
         border: Border.all(color: HexColor("#3C3C3C"), width: 5),
       ),
       child: Material(
-        color: accepted? Colors.green : HexColor("#C4C4C4"),
+        color: currentCampaign.sensorList[index].selected? Colors.green : HexColor("#C4C4C4"),
         child: InkWell(
           splashColor: Colors.white70,
           child: Container(
@@ -45,7 +53,7 @@ class InformationTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${this.points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
+                    Text("${currentCampaign.sensorList[index].points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
                     IconButton(
                         icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
@@ -57,7 +65,7 @@ class InformationTile extends StatelessWidget {
           ),
           onTap: () {
             this.addPoints(this.points);
-            this.accepted = !this.accepted;
+            currentCampaign.sensorList[index].selected = !currentCampaign.sensorList[index].selected;
             (context as Element).markNeedsBuild();
           },
         ),

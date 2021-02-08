@@ -12,10 +12,8 @@ class ActiveCampaignsPage extends StatelessWidget {
   static const String pageTitle = 'ActiveCampaigns';
   List<User> userList;
   User currentUser;
-  List<dynamic> newCampaignsList;
 
-
-  ActiveCampaignsPage(this.currentUser, this.newCampaignsList);
+  ActiveCampaignsPage(this.currentUser);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class ActiveCampaignsPage extends StatelessWidget {
             childAspectRatio: 1.85
         ),
         itemBuilder: (context, int index) =>
-            CampaignTile(context, index, currentUser.newCampaigns, currentUser.acceptedCampaigns[index], currentUser),
+            CampaignTile(context, index, currentUser.acceptedCampaigns[index], currentUser),
       ),
     );
   }

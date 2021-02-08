@@ -101,7 +101,7 @@ class _BasePageState extends State<BasePage> {
           _selectedPage = RankingPage(userList, currentUser);
           break;
         case 5:
-          _selectedPage = ActiveCampaignsPage(currentUser, newCampaignsList);
+          _selectedPage = ActiveCampaignsPage(currentUser);
       }
     });
   }

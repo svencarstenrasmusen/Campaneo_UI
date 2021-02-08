@@ -1,7 +1,8 @@
-
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:campaneo_app/widgets/status_widget.dart';
+import 'package:campaneo_app/data/sensor.dart';
+import 'package:campaneo_app/faker/fake_sensors.dart';
 
 class Campaign {
   String id;
@@ -13,6 +14,7 @@ class Campaign {
   String gdprClassification;
   Organization organization;
   Status status = Status.New;
+  List<Sensor> sensorList = new FakeSensors().sensorList;
 
   Campaign({
     this.id,
