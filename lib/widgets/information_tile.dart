@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:campaneo_app/widgets/information_detail_dialog.dart';
 import 'package:campaneo_app/data/user.dart';
+import 'package:campaneo_app/widgets/status_widget.dart';
 
 
 /// This widget acts as a tile button for the homepage screen. Where other
@@ -23,10 +24,8 @@ class InformationTile extends StatelessWidget {
   int index;
   Campaign currentCampaign;
 
-  InformationTile(this.iconData, this.addPoints, this.currentUser, this.campaignListIndex, this.index) {
+  InformationTile(this.iconData, this.addPoints, this.currentUser, this.campaignListIndex, this.index, this.currentCampaign) {
     this.points = (random.nextDouble() * (10 - 1) + 1).floor();
-    currentCampaign = currentUser.newCampaigns[campaignListIndex];
-    this.selected = currentCampaign.sensorList[index].selected;
   }
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
@@ -64,13 +63,25 @@ class InformationTile extends StatelessWidget {
             ),
           ),
           onTap: () {
-            this.addPoints(this.points);
-            currentCampaign.sensorList[index].selected = !currentCampaign.sensorList[index].selected;
-            (context as Element).markNeedsBuild();
+            if(currentCampaign.status == Status.Accepted) {
+              print("not editable");
+            } else {
+              this.addPoints(this.points);
+              currentCampaign.sensorList[index].selected = !currentCampaign.sensorList[index].selected;
+              (context as Element).markNeedsBuild();
+            }
           },
         ),
       ),
     );
+  }
+
+  bool isEditable() {
+    if(currentCampaign.status == Status.Accepted) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   showCampaignInfo(BuildContext context) {

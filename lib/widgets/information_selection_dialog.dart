@@ -55,7 +55,7 @@ class InformationSelectionDialog extends StatelessWidget {
                     crossAxisCount: 3,
                     childAspectRatio: 1.0
                 ),
-                itemBuilder: (BuildContext context, int index) => InformationTile(iconList[index], incrementPoints, currentUser, this.campaignListIndex, index)
+                itemBuilder: (BuildContext context, int index) => InformationTile(iconList[index], incrementPoints, currentUser, this.campaignListIndex, index, campaignDetails)
             ),
           ),
           Container(
