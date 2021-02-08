@@ -66,8 +66,12 @@ class InformationTile extends StatelessWidget {
             if(currentCampaign.status == Status.Accepted) {
               print("not editable");
             } else {
-              this.addPoints(this.points);
               currentCampaign.sensorList[index].selected = !currentCampaign.sensorList[index].selected;
+              if(currentCampaign.sensorList[index].selected == true) {
+                this.addPoints(5);
+              } else {
+                this.addPoints(-5);
+              }
               (context as Element).markNeedsBuild();
             }
           },

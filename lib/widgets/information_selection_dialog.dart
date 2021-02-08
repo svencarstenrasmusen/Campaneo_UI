@@ -17,6 +17,8 @@ class InformationSelectionDialog extends StatelessWidget {
   Function statusCallback;
   int campaignListIndex;
   Campaign campaignDetails;
+  Color confirmButtonColor = Colors.grey;
+  BuildContext context;
 
   InformationSelectionDialog(this.currentUser, this.statusCallback, this.campaignListIndex, this.campaignDetails);
 
@@ -38,6 +40,7 @@ class InformationSelectionDialog extends StatelessWidget {
   Widget dialogContent(BuildContext context) {
     double height = MediaQuery.of(context).size.height * 0.85;
     double width = MediaQuery.of(context).size.width * 0.80;
+    context = context;
 
     return Container(
       height: height,
@@ -60,7 +63,7 @@ class InformationSelectionDialog extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.bottomRight,
-            child: acceptButton(context, height, width),
+            child: isActiveCampaign()? infoBox(context, height, width) : acceptButton(context, height, width),
           )
         ],
       ),
@@ -76,26 +79,48 @@ class InformationSelectionDialog extends StatelessWidget {
       height: height * 0.15,
       width: width * 0.25,
       child: Material(
-        color: Colors.green,
+        color: confirmButtonColor,
         child: InkWell(
           child: Center(
             child: Text("CONFIRM SELECTION", style: TextStyle(fontSize: height / 20)),
           ),
           onTap: () {
-            currentUser.setCompletedCampaigns(currentUser.getCompletedCampaigns+1);
-            currentUser.setPoints(currentUser.getPoints + this.combinedPoints);
-            //statusCallback(Status.Accepted);
-            //currentUser.newCampaigns[campaignListIndex].status = Status.Accepted;
-            currentUser.newCampaigns.removeAt(campaignListIndex);
-            campaignDetails.status = Status.Accepted;
-            currentUser.acceptedCampaigns.add(campaignDetails);
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+            if(this.combinedPoints > 0) {
+              currentUser.setCompletedCampaigns(currentUser.getCompletedCampaigns+1);
+              currentUser.setPoints(currentUser.getPoints + this.combinedPoints);
+              //statusCallback(Status.Accepted);
+              //currentUser.newCampaigns[campaignListIndex].status = Status.Accepted;
+              currentUser.newCampaigns.removeAt(campaignListIndex);
+              campaignDetails.status = Status.Accepted;
+              currentUser.acceptedCampaigns.add(campaignDetails);
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            }
 
-            },
+          },
         ),
       ),
     );
   }
 
+  Widget infoBox(BuildContext context, double height, double width) {
+    return Container(
+      height: height * 0.15,
+      width: width * 0.25,
+      child: Material(
+        color: Colors.green,
+        child: Center(
+          child: Text("SHARED INFORMATION", style: TextStyle(fontSize: height / 20)),
+        ),
+      )
+    );
+  }
+
+  bool isActiveCampaign() {
+    if(campaignDetails.status == Status.Accepted) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
