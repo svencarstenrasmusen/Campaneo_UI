@@ -76,14 +76,6 @@ class InformationTile extends StatelessWidget {
     );
   }
 
-  bool isEditable() {
-    if(currentCampaign.status == Status.Accepted) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   showCampaignInfo(BuildContext context) {
     showDialog(
         context: context,
