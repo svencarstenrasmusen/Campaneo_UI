@@ -14,8 +14,10 @@ class RewardTile extends StatelessWidget {
   final int reductionPercentage;
   final Coupon coupon = new Coupon("Lorem ipsum...");
   List<User> userList;
+  String couponTypeName;
+  Function callback;
 
-  RewardTile(this.points, this.reductionPercentage, this.userList);
+  RewardTile(this.points, this.reductionPercentage, this.userList, this.callback);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -72,10 +74,11 @@ class RewardTile extends StatelessWidget {
         context: context,
         builder: (_) => AlertDialog(
             title: Text("Confirm Your Purchase"),
-            content: Text("Are you sure you want to purchase the coupon for $points points?"),
+            content: Text("Are you sure you want to purchase the $couponTypeName for $points points?"),
             actions: <Widget>[
               FlatButton(onPressed: () {
                 userList[2].setPointsVoid(userList[2].getPoints - points);
+                callback();
                 Navigator.of(context).pop();
               },
                   child: Text("Confirm")
@@ -94,15 +97,19 @@ class RewardTile extends StatelessWidget {
     print("changing screen.");
     switch(type) {
       case couponType.Fuel:
+        couponTypeName = "Reduced-Fuel-Price-Coupon";
         return Icons.local_gas_station;
         break;
       case couponType.CarWash:
+        couponTypeName = "Reduced-Car-Wash-Price-Coupon";
         return Icons.local_car_wash;
         break;
       case couponType.Service:
+        couponTypeName = "Car-Service-Coupon";
         return Icons.build;
         break;
       default:
+        couponTypeName = "Giftcard-Coupon";
         return Icons.card_giftcard;
         break;
     }

@@ -8,13 +8,13 @@ class Coupon {
   int _cost;
   couponType _type;
   final String _description;
+  var random = new Random();
 
   Coupon(this._description) {
-    var random = new Random();
 
-    this._reduction = random.nextInt(100);
-    this._cost = random.nextInt(400);
-    this._type = couponType.values.elementAt(random.nextInt(4));
+    this._reduction = (random.nextDouble() * (50 - 5) + 5).floor();
+    this._cost = (random.nextDouble() * (5 - 2) + 2).floor() * _reduction;
+    this._type = couponType.values.elementAt(random.nextInt(3));
 
   }
 

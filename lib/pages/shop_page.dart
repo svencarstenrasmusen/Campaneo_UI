@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:campaneo_app/widgets/reward_tile.dart';
 import 'package:campaneo_app/data/user.dart';
 
-class ShopPage extends StatelessWidget {
+class ShopPage extends StatefulWidget {
   static const String routeName = '/shop';
   static const String pageTitle = 'Shop';
   List<User> userList;
 
   ShopPage(this.userList);
 
-  //TODO: replace hardcoded tiles with actual tiles
+  @override
+  _ShopPageState createState() => _ShopPageState();
+}
+
+class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
 
@@ -24,9 +28,15 @@ class ShopPage extends StatelessWidget {
                 crossAxisCount: 3,
                 childAspectRatio: 1.85
             ),
-            itemBuilder: (BuildContext context, int index) => RewardTile(index, 30, userList)
+            itemBuilder: (BuildContext context, int index) => RewardTile(index, 30, widget.userList, updateList)
         ),
       ),
     );
+  }
+
+  updateList() {
+    setState(() {
+      widget.userList = widget.userList;
+    });
   }
 }
