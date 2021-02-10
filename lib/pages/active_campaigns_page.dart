@@ -23,7 +23,7 @@ class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
+    return widget.currentUser.acceptedCampaigns.length>0? Scrollbar(
       child: GridView.builder(
         itemCount: widget.currentUser.acceptedCampaigns.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -33,6 +33,9 @@ class _ActiveCampaignsPageState extends State<ActiveCampaignsPage> {
         itemBuilder: (context, int index) =>
             CampaignTile(context, index, widget.currentUser.acceptedCampaigns[index], widget.currentUser, updateList),
       ),
+    ) :
+    Center(
+      child: Text("You are currently not participating in any campaign. Have a look in the New Campaigns-page to participate in a campaign.", style: TextStyle(fontSize: 24), textAlign: TextAlign.center),
     );
   }
 
