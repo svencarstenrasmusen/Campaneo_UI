@@ -16,8 +16,9 @@ class RewardTile extends StatelessWidget {
   List<User> userList;
   String couponTypeName;
   Function callback;
+  User currentUser;
 
-  RewardTile(this.points, this.reductionPercentage, this.userList, this.callback);
+  RewardTile(this.points, this.reductionPercentage, this.userList, this.callback, this.currentUser);
 
   //TODO: add ontap-function, all tiles have a different screen to navigate to
 
@@ -63,8 +64,34 @@ class RewardTile extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () { showPurchaseDialog(context, this.coupon.getCost); },
+          onTap: () { hasSufficientPoints()? showPurchaseDialog(context, this.coupon.getCost) : showInsufficientPointsDialog(context); },
         ),
+      ),
+    );
+  }
+
+  bool hasSufficientPoints() {
+    if (currentUser.getPoints >= coupon.getCost) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showInsufficientPointsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Sorry :("),
+        content: Text("You currently do not have enough points to purchase this coupon."),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Dismiss")
+          )
+        ],
       ),
     );
   }
@@ -77,8 +104,10 @@ class RewardTile extends StatelessWidget {
             content: Text("Are you sure you want to purchase the $couponTypeName for $points points?"),
             actions: <Widget>[
               FlatButton(onPressed: () {
-                userList[2].setPointsVoid(userList[2].getPoints - points);
+                //userList[2].setPointsVoid(userList[2].getPoints - points);
                 callback();
+                this.currentUser.setPoints(this.currentUser.getPoints - this.coupon.getCost);
+                print("new points should be: ${this.currentUser.getPoints}");
                 Navigator.of(context).pop();
               },
                   child: Text("Confirm")

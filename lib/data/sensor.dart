@@ -12,7 +12,7 @@ import 'dart:math';
 ///   4 -> GPS
 
 class Sensor {
-  int points = 5;
+  int points = 10;
   bool selected = false;
   String name;
   String description;

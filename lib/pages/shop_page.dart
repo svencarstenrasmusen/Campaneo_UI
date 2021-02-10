@@ -7,8 +7,9 @@ class ShopPage extends StatefulWidget {
   static const String routeName = '/shop';
   static const String pageTitle = 'Shop';
   List<User> userList;
+  User currentUser;
 
-  ShopPage(this.userList);
+  ShopPage(this.userList, this.currentUser);
 
   @override
   _ShopPageState createState() => _ShopPageState();
@@ -28,7 +29,7 @@ class _ShopPageState extends State<ShopPage> {
                 crossAxisCount: 3,
                 childAspectRatio: 1.85
             ),
-            itemBuilder: (BuildContext context, int index) => RewardTile(index, 30, widget.userList, updateList)
+            itemBuilder: (BuildContext context, int index) => RewardTile(index, 30, widget.userList, updateList, widget.currentUser)
         ),
       ),
     );

@@ -92,7 +92,7 @@ class _BasePageState extends State<BasePage> {
           _selectedPage = AllCampaignsPage(currentUser, newCampaignsList);
           break;
         case 2:
-          _selectedPage = ShopPage(userList);
+          _selectedPage = ShopPage(userList, currentUser);
           break;
         case 3:
           _selectedPage = SettingsPage();

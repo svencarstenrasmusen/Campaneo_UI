@@ -70,9 +70,9 @@ class InformationTile extends StatelessWidget {
             } else {
               currentCampaign.sensorList[index].selected = !currentCampaign.sensorList[index].selected;
               if(currentCampaign.sensorList[index].selected == true) {
-                this.addPoints(5);
+                this.addPoints(10);
               } else {
-                this.addPoints(-5);
+                this.addPoints(-10);
               }
               (context as Element).markNeedsBuild();
             }

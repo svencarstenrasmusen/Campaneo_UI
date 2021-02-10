@@ -41,7 +41,7 @@ class InformationDetailDialog extends StatelessWidget {
         children: [
           Text(this.informationType, style: TextStyle(fontSize: height / 15, color: Colors.white70)),
           Text(this.description, style: TextStyle(fontSize: height / 25, color: Colors.white70)),
-          Text("Reward: 5 Points", style: TextStyle(fontSize: height / 20, color: Colors.white70)),
+          Text("Reward: 10 Points", style: TextStyle(fontSize: height / 20, color: Colors.white70)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
