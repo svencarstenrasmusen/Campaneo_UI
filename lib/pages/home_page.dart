@@ -19,7 +19,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double iconSize = height / 3;
+    double smallestScreenSize = setSizingDependency(height, width);
+    double scalingFactor = setScalingFactor(height, width);
+    double iconSize = smallestScreenSize / (scalingFactor - 5);
 
     return Container(
       child: Column(
@@ -29,8 +31,8 @@ class HomePage extends StatelessWidget {
               //TODO: change textStyle according to theme automatically
               MenuTile("Your Vehicle",  Icon(Icons.directions_car, size: iconSize, color: Colors.white), () { print("tapped YOUR VEHICLE");}),
               MenuTile("Your Active Campaigns", CircleAvatar(
-                child: Text("${currentUser.acceptedCampaigns.length}", style: TextStyle(fontSize: height / 6.5, color: Colors.white, fontWeight: FontWeight.bold)),
-                radius: height / 6.5,
+                child: Text("${currentUser.acceptedCampaigns.length}", style: TextStyle(fontSize: smallestScreenSize / scalingFactor, color: Colors.white, fontWeight: FontWeight.bold)),
+                radius: smallestScreenSize / scalingFactor,
                 backgroundColor: Colors.lightGreen,
               ), () {changeScreen(5);})
             ],
@@ -44,5 +46,24 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// Method to take return the smaller value between height and with.
+  /// This value is then used to scale the texts and other widgets, incase
+  /// the user changes the window size of the application.
+  double setSizingDependency(double height, double width) {
+    if(height <= width) {
+      return height;
+    } else {
+      return width;
+    }
+  }
+
+  double setScalingFactor(double height, double width) {
+    if(height <= width) {
+      return 9;
+    } else {
+      return 13;
+    }
   }
 }

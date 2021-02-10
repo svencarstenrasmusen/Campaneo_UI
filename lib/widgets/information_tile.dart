@@ -50,13 +50,15 @@ class InformationTile extends StatelessWidget {
               children: [
                 Icon(this.iconData, size: width / 6, color: HexColor("#3C3C3C")),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text("${currentCampaign.sensorList[index].points} PTS", style: TextStyle(fontSize: height / 15, color: HexColor("#3C3C3C"))),
+                    Spacer(),
                     IconButton(
                         icon: Icon(Icons.info, size: height / 15, color: HexColor("#3C3C3C")),
                         padding: EdgeInsets.all(0),
-                        onPressed: () => {showCampaignInfo(context)})
+                        onPressed: () => {showCampaignInfo(context)}),
+                    Container(width: 20)
                   ],
                 ),
               ],
@@ -84,8 +86,8 @@ class InformationTile extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => InformationDetailDialog(
-            "Wheel Speed Sensor",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+            "${currentCampaign.sensorList[index].name}",
+            "${currentCampaign.sensorList[index].description}",
             3)
     );
   }

@@ -41,12 +41,12 @@ class InformationDetailDialog extends StatelessWidget {
         children: [
           Text(this.informationType, style: TextStyle(fontSize: height / 15, color: Colors.white70)),
           Text(this.description, style: TextStyle(fontSize: height / 25, color: Colors.white70)),
-          Text("Reward: ${this.points}", style: TextStyle(fontSize: height / 20, color: Colors.white70)),
+          Text("Reward: 5 Points", style: TextStyle(fontSize: height / 20, color: Colors.white70)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               continueButton(context, height, width),
-              declineButton(context, height, width)
+              //declineButton(context, height, width)
             ],
           ),
         ],
@@ -59,10 +59,10 @@ class InformationDetailDialog extends StatelessWidget {
       height: height * 0.15,
       width: width * 0.25,
       child: Material(
-        color: Colors.green,
+        color: Colors.grey,
         child: InkWell(
           child: Center(
-            child: Text("ACCEPT", style: TextStyle(fontSize: height / 10)),
+            child: Text("GO BACK", style: TextStyle(fontSize: height / 10)),
           ),
           onTap: () => { Navigator.pop(context) },
         ),

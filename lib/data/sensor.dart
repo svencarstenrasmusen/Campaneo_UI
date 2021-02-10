@@ -14,8 +14,9 @@ import 'dart:math';
 class Sensor {
   int points = 5;
   bool selected = false;
+  String name;
   String description;
   int sensorType;
 
-  Sensor(this.description, this.sensorType);
+  Sensor(this.name, this.description, this.sensorType);
 }

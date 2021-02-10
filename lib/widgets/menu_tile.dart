@@ -19,6 +19,7 @@ class MenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    double smallestScreenSize = setSizingDependency(height, width);
 
     return Container(
       height: height * 0.45,
@@ -31,7 +32,7 @@ class MenuTile extends StatelessWidget {
         child: InkWell(
           child: Column(
             children: <Widget>[
-              Text(this.title, style: TextStyle(color: Colors.white, fontSize: height / 12)),
+              Text(this.title, style: TextStyle(color: Colors.white, fontSize: smallestScreenSize / 12)),
               Spacer(flex: 2),
               this.widget,
               Spacer(flex: 4),
@@ -41,6 +42,17 @@ class MenuTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Method to take return the smaller value between height and with.
+  /// This value is then used to scale the texts and other widgets, incase
+  /// the user changes the window size of the application.
+  double setSizingDependency(double height, double width) {
+    if(height <= width) {
+      return height;
+    } else {
+      return width;
+    }
   }
 
 }
