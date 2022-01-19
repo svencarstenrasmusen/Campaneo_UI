@@ -23,6 +23,7 @@ class User {
     _completedCampaigns = value;
   }
 
+  //demo
   void setPoints(int value) {
     _points = value;
   }
